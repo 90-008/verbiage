@@ -1,5 +1,4 @@
 const { RouteLeaf } = require("../../lib/waiter/RouteTree")
-const { Cookie } = require("../../lib/waiter/AppRequest")
 
 module.exports.HomePageRoute = new RouteLeaf(
     "/",
@@ -17,26 +16,11 @@ module.exports.HomePageRoute = new RouteLeaf(
 module.exports.PageTestRoute = new RouteLeaf(
     "/w/:user/pages/+path",
     {
-        "GET": (req) => {
-            req.set(JSON.stringify(req.args))
-            return req
+        "GET": (data) => {
+            let rendered = Lavender.render("TestComponent", { greeting: "Hello, World!", appRequest: data })
+
+            data.body = rendered
+            return data
         }
     },
-)
-
-module.exports.CookieTestRoute = new RouteLeaf(
-    "/cookie/:foo",
-    {
-        "GET": (req) => {
-            //console.log(req.cookies)
-
-            let cookie = new Cookie("sample", decodeURIComponent(req.args.foo))
-            cookie.sameSite = cookie.SameSiteValue.Lax
-            cookie.expiresAt = Date.now() + 120_000
-            cookie.isSecure = true
-
-            req.setCookie(cookie)
-            return req
-        }
-    }
 )

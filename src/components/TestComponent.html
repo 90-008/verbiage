@@ -5,12 +5,10 @@
 </head>
 
 <body>
-    {if thing}
-    {if somethingelse}
-    <h1>Some Text Here</h1>
+    <h1>{echo @greeting}</h1>
+    <h2>{echo @appRequest.request.url}</h2>
+    {for array item}
+    <p>{echo item}</p>
     {end}
-    {else}
-    <h2>Something else</h2>
-    {end}
-    <p>One last thing...</p>
+    <p>this should not render: {echo item}</p>
 </body>

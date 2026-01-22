@@ -31,11 +31,15 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [x] Cookies
 - - [x] Middleware (defined in route, cascades to child routes, i.e. `requiresAuth` on `/secrets` applies to `/secrets/shh` and `/secrets/shush`)
 - [ ] **Lavender**
-- - [ ] Basic HTML parsing/substitution (be able to insert a string into the page)
-- - [ ] Object traversal - `{object.property}`
-- - [ ] If/else statement - `{if some_prop}<p>True</p>{else}<p>Not true</p>{end}`
-- - [ ] For statement - `{for item of list}{end}`
-- - [ ] Components: HTML templates, hydration using JS
+- - [X] Basic HTML parsing/substitution (be able to insert a string into the page)
+- - [X] Object traversal - `{object.property}`
+- - [X] If/else statement - `{if some_prop}<p>True</p>{else}<p>Not true</p>{end}`
+- - [X] For statement - `{for item of list}{end}`
+- - [X] Components: HTML templates, hydration using JS
+- - [ ] Use a layout to wrap around content
+- - [ ] Safe string insert (XSS-resistant)
+- - [ ] Cleanup templates (remove whitespace between html tags)
+- - [ ] Better error reporting (give approximate position of a faulty expression)
 - [ ] **Database/file driver - name TBD**
 - - [ ] --TBD--
 - [ ] **Verbiage**

@@ -3,13 +3,21 @@ const { join, parse } = require('node:path')
 
 const { Waiter } = require('../lib/waiter/WaiterServer.js')
 const { Component } = require('../lib/lavender/Component.js')
+const { Lavender } = require('../lib/lavender/Lavender.js')
 
 class App {
     server
+    lavender
 
     constructor() {
         this.server = new Waiter()
 
+        this.lavender = new Lavender()
+        globalThis.Lavender = this.lavender
+
+        this.components = {}
+
+        globalThis.Verbiage = this
         return this
     }
 
@@ -61,10 +69,17 @@ class App {
 
             let basePart = parse(f).dir + "/" + parse(f).name
             let hasScript = existsSync(join(where, basePart) + ".js")
-            console.log(basePart, hasScript)
+            console.log(`app/html > Importing component ${basePart} | has script: ${hasScript}`)
 
             let template = readFileSync(join(where, basePart) + ".html", { encoding: "utf8" })
-            let component = new Component(template)
+            let { hydrate } = require(join(where, basePart) + ".js")
+
+            if (!hydrate) throw "Component JS file is present but isn't exporting any hydrator"
+
+            let component = new Component(template, hydrate, this.lavender)
+            let compName = parse(f).name
+
+            this.lavender.register(compName, component)
         })
     }
 }
