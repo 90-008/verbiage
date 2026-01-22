@@ -7,8 +7,11 @@
 <body>
     <h1>{echo @greeting}</h1>
     <h2>{echo @appRequest.request.url}</h2>
-    {for array item}
-    <p>{echo item}</p>
-    {end}
+    <ul>
+        {for self.array item}
+        <li>{echo item}</li>
+        {end}
+    </ul>
     <p>this should not render: {echo item}</p>
+    <p>My fruit bowl has {echo self.array.length} items.</p>
 </body>
