@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-
-<head>
-
-</head>
-
-<body>
-    <h1>{echo @greeting}</h1>
-    <h2>{echo @appRequest.request.url}</h2>
-    <ul>
-        {for self.array item}
-        <li>{echo item}</li>
-        {end}
-    </ul>
-    <p>this should not render: {echo item}</p>
-    <p>My fruit bowl has {echo self.array.length} items.</p>
-</body>
+<p>Hi!</p>
+<ul>
+    {for self.array fruit}
+    <li>{echo fruit}</li>
+    {end}
+</ul>

@@ -8,14 +8,11 @@ const { Lavender } = require('../lib/lavender/Lavender.js')
 class App {
     server
     lavender
-    components
 
     constructor() {
         this.server = new Waiter()
 
         this.lavender = new Lavender()
-
-        this.components = {}
 
         return this
     }
@@ -73,10 +70,10 @@ class App {
             console.log(`app/html > Importing component ${basePart} | has script: ${hasScript} | has fallback: ${hasFallback}`)
 
             let template = readFileSync(join(where, basePart) + ".html", { encoding: "utf8" })
-            let fallbackTemplate = readFileSync(join(where, basePart) + ".error.html", { encoding: "utf8" })
-            let { hydrate, onError } = require(join(where, basePart) + ".js")
+            let fallbackTemplate = hasFallback ? readFileSync(join(where, basePart) + ".error.html", { encoding: "utf8" }) : null
+            let { hydrate, onError } = hasScript ? require(join(where, basePart) + ".js") : { hydrate: null, onError: null }
 
-            if (!hydrate) throw new Error("Component JS file is present but isn't exporting any hydrator")
+            if (hasScript && !hydrate) throw new Error("Component JS file is present but isn't exporting any hydrator")
 
             let compName = parse(f).name
             let component = new Component(
