@@ -19,7 +19,7 @@ module.exports.PageTestRoute = new RouteLeaf(
         "GET": (data) => {
             let rendered = Lavender.render("TestComponent", { greeting: "Hello, World!", appRequest: data })
 
-            data.body = rendered
+            data.body = rendered.html
             return data
         }
     },

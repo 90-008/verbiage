@@ -76,12 +76,13 @@ class App {
             let fallbackTemplate = readFileSync(join(where, basePart) + ".error.html", { encoding: "utf8" })
             let { hydrate, onError } = require(join(where, basePart) + ".js")
 
-            if (!hydrate) throw "Component JS file is present but isn't exporting any hydrator"
+            if (!hydrate) throw new Error("Component JS file is present but isn't exporting any hydrator")
 
+            let compName = parse(f).name
             let component = new Component(
                 { base: template, fallback: hasFallback && fallbackTemplate },
-                { base: hydrate, fallback: onError }, this.lavender)
-            let compName = parse(f).name
+                { base: hydrate, fallback: onError },
+                basePart, this.lavender)
 
             this.lavender.register(compName, component)
         })

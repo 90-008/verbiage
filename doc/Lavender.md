@@ -21,7 +21,10 @@ Components are scanned for in the `/src/components` directory. Each component is
 
 ## I.III. Rendering with Lavender
 
-Rendering is done by calling `Lavender.render(componentName, contextData)`. This method returns the HTML that was rendered as a string.
+Rendering is done by calling `Lavender.render(componentName, contextData)`. This method returns an object containing: 
+* `html` - the HTML that was rendered as a string.
+* `errored` - whether the component triggered a fallback template.
+* `error` - the error returned by the initial template before the fallback triggered, if any.
 
 While the component data is volatile between scopes, rendering context data stays the same across all levels of the template. This makes it useful for exchanging information like authentication state with components.
 
