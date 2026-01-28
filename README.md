@@ -13,8 +13,8 @@ Verbiage is a wiki/knowledge base engine with one simple twist: everything is wr
 
 You may notice that there's nothing one could call an "app" here right now. That's because to write a wiki engine from scratch, I must first invent the universe. Please excuse the dust while I write all the prerequisite libraries needed to get this working. For those interested, the gist of the plan is:
 
-1. Get a router working ( <-- you are here now )
-2. Write an HTML templating engine, enabling ✨ interactivity ✨ using forms
+1. Get a router working
+2. Write an HTML templating engine, enabling ✨ interactivity ✨ using forms ( <-- you are here now )
 3. Write a caching/driver layer on top of the file system, enabling ✨ permanent storage ✨
 4. Once routing, interactivity, and permanent storage are all available to me, I can then start working on the application code.
 
