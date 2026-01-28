@@ -8,6 +8,11 @@ The `Lavender` class is used to store and retrieve/render components. Components
 
 The `Component` class holds the component's hydration function and HTML syntax tree. The `Component.resolve()` method allows rendering the component.
 
+The Component class constructor takes three arguments:
+* The HTML templates to use. It expects an object with two string properties: `base` (required), and `fallback` (optional).
+* The hydrator functions to use. It expects an object with two function properties: `base` (required), and `fallback` (optional).
+* The Lavender app instance to bind to for accessing the component registry of that instance (optional).
+
 Note that within Verbiage, `Lavender` is registered as a global variable.
 
 ## I.II. Component structure
@@ -95,3 +100,26 @@ The for expression takes the input of an iterable symbol and an iterator name, r
 ```
 
 The render expression takes a component name and an optional symbol to pass on to the component being rendered, respectively. The rendered component is pasted into the template.
+
+# IV. Fallbacks & Error handling
+
+Lavender allows you to provide a fallback template for your component. When a component or any of its downstream components fails to render (whether due to a template error or hydrator error), an error will be logged to the console and the fallback template will take over.
+
+If one is present, the fallback hydrator function (`onError`) will run with the arguments (error object, rendering context). This function can return an object representing the data to be passed on to the fallback template, as usual. The fallback template will always receive the error object itself in its properties (`self.error`).
+
+Consider this example setup:
+
+```
+-- UserBadge.html --
+
+<p>{echo user.username}</p>
+
+-- UserBadge.error.html --
+
+<p style="color: red;">Unable to retrieve user: {echo self.error}</p>
+
+-- UserBadge.js --
+
+module.exports.hydrate = (...) => {...}
+module.exports.onError = (e, ctx) => { /* error logic runs here */ }
+```
