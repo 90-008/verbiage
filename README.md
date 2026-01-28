@@ -69,4 +69,8 @@ More documentation for Waiter is available at `./doc/Waiter.md`
 ### Lavender - HTML Templating Engine
 `./lib/lavender`
 
+Waiter is a component-based server-side rendering framework and templating engine. It is responsible for crafting the HTML responses to send to clients.
+
+More documentation for Lavender is available at `./doc/Lavender.md`
+
 \* WIP \*
