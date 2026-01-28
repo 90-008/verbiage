@@ -21,7 +21,7 @@ module.exports.PageTestRoute = new RouteLeaf(
             let rendered = Lavender
                 .layout("BaseLayout")
                 .render("TestComponent", { greeting: "Hello, World!", appRequest: data })
-            console.log(rendered)
+            //console.log(rendered)
 
             data.body = rendered.html
             return data
