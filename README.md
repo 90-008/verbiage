@@ -36,10 +36,11 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [X] If/else statement - `{if some_prop}<p>True</p>{else}<p>Not true</p>{end}`
 - - [X] For statement - `{for item of list}{end}`
 - - [X] Components: HTML templates, hydration using JS
-- - [ ] Use a layout to wrap around content
+- - [X] Fallback components
+- - [X] Use a layout to wrap around content
 - - [ ] Safe string insert (XSS-resistant)
 - - [ ] Cleanup templates (remove whitespace between html tags)
-- - [ ] Better error reporting (give approximate position of a faulty expression)
+- - [X] Better error reporting (give approximate position of a faulty expression)
 - [ ] **Database/file driver - name TBD**
 - - [ ] --TBD--
 - [ ] **Verbiage**

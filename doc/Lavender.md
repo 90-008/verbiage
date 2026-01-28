@@ -128,3 +128,38 @@ Consider this example setup:
 module.exports.hydrate = (...) => {...}
 module.exports.onError = (e, ctx) => { /* error logic runs here */ }
 ```
+
+# V. Layouts
+
+Lavender provides an abstraction for handling wrapping layouts around components and the associated tasks that come with it. The `Lavender.layout(componentName)` function returns a layout context to render with, which you can then call `LayoutContext.render(componentName, context, tolerateErrors)` on to render a component and place it within the layout. The layout and the component share the same context.
+
+Layouts are, for most purposes, regular components - they can have fallback templates and be hydrated. The difference is that components have access to a special expression - `{slot}`. When this expression is encountered:
+* The inner component of the layout is rendered.
+* If `tolerateErrors` is `false` and the component encountered an error (including those that would otherwise be caught by the fallback template), the error is passed on to the layout.
+* If everything went correctly, the inner component's HTML output is placed where the slot is.
+
+`LayoutContext.render()` returns the same data as the standard `Lavender.render()` function, but with two additional properties:
+* `component` - The result of rendering the inner component.
+* `anyErrored` - Whether the layout *and/or* the inner component encountered a rendering error.
+
+Example of using layouts:
+
+Base layout template:
+```html
+<!DOCTYPE html>
+<head>
+...
+</head>
+<body>
+    <div class="content">
+        {slot}
+    </div>
+</body>
+```
+
+Application logic:
+```js
+let rendered = Lavender
+        .layout("BaseLayout")
+        .render("WikiPage", { currentUser: { ... }, wikiPage: { ... } }, false)
+```
