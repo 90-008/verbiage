@@ -8,16 +8,15 @@ const { Lavender } = require('../lib/lavender/Lavender.js')
 class App {
     server
     lavender
+    components
 
     constructor() {
         this.server = new Waiter()
 
         this.lavender = new Lavender()
-        globalThis.Lavender = this.lavender
 
         this.components = {}
 
-        globalThis.Verbiage = this
         return this
     }
 
