@@ -51,8 +51,10 @@ Lavender includes a simple templating language. Expressions are wrapped in curly
 
 Often, expressions will need to access the data provided by the components and the rendering context - Lavender calls these "symbols".
 
-Symbols can traverse into objects: `<p>{echo strings.greeting}</p>` --> `<p>Hello, World!</p>`
-Prepend an `@` symbol to access the rendering context: `<p>{echo @currentUser.username}</p>`
+Syntax features:
+* Symbols can traverse into objects: `<p>{echo strings.greeting}</p>` --> `<p>Hello, World!</p>`
+* Prepend an `@` symbol to access the rendering context: `<p>{echo @currentUser.username}</p>`
+* Some expressions expect symbols to be non-null, others don't care. To manually mark a symbol as non-nullable, append a `!` to the end: `<p>this will error if null: {echo important!}</p>`
 
 ## III.I. Echo expression
 
