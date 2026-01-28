@@ -64,18 +64,23 @@ class App {
         */
         files.forEach((f) => {
             if (statSync(join(where, f)).isDirectory()) return
-            if (!f.endsWith(".html")) return
+            /* Match thing.html but not e.g. thing.error.html or thing.part.html */
+            if (!f.match(/^[^.]+\.html$/gm)) return
 
             let basePart = parse(f).dir + "/" + parse(f).name
             let hasScript = existsSync(join(where, basePart) + ".js")
-            console.log(`app/html > Importing component ${basePart} | has script: ${hasScript}`)
+            let hasFallback = existsSync(join(where, basePart) + ".error.html")
+            console.log(`app/html > Importing component ${basePart} | has script: ${hasScript} | has fallback: ${hasFallback}`)
 
             let template = readFileSync(join(where, basePart) + ".html", { encoding: "utf8" })
-            let { hydrate } = require(join(where, basePart) + ".js")
+            let fallbackTemplate = readFileSync(join(where, basePart) + ".error.html", { encoding: "utf8" })
+            let { hydrate, onError } = require(join(where, basePart) + ".js")
 
             if (!hydrate) throw "Component JS file is present but isn't exporting any hydrator"
 
-            let component = new Component(template, hydrate, this.lavender)
+            let component = new Component(
+                { base: template, fallback: hasFallback && fallbackTemplate },
+                { base: hydrate, fallback: onError }, this.lavender)
             let compName = parse(f).name
 
             this.lavender.register(compName, component)
