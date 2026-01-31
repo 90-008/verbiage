@@ -1,6 +1,35 @@
 body {
     font-family: 'Verdana', sans-serif;
     background-color: #f9fdff;
+    margin: 0;
+}
+
+@media (width < 40em) {
+    .site-header {
+        font-size: 18pt;
+        text-align: center;
+        margin: 0.5em 0 !important;
+    }
+
+    .site-subheader {
+        display: none;
+    }
+
+    .content-body {
+        flex-direction: column;
+        min-height: initial !important;
+    }
+
+    .page {
+        width: unset !important;
+    }
+
+    .side-panel {
+        width: 100% !important;
+        border-left: none !important;
+        border-top: 1px solid #c3c3c3;
+        min-height: 20em;
+    }
 }
 
 .main {
@@ -31,6 +60,7 @@ body {
     display: flex;
     min-height: 45em;
     font-size: 11pt;
+    color: #313131;
 }
 
 .page {
@@ -42,6 +72,9 @@ body {
     background-color: #f2f2f2;
     width: 22em;
     border-left: 1px solid #c3c3c3;
+}
+
+.side-panel-inner {
     padding: 0 0.25em;
 }
 
@@ -53,7 +86,7 @@ body {
     align-items: center;
     border-bottom: 1px solid #7b7b7b;
     border-top: 1px solid #ccc;
-    background: linear-gradient(180deg, rgb(255, 255, 255) 90%, rgb(217, 217, 217) 100%);
+    background: linear-gradient(180deg, #fdfdfd 90%, rgb(217, 217, 217) 100%)
 }
 
 .breadcrumb {
