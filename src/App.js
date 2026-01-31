@@ -1,6 +1,8 @@
 const { readdirSync, readFileSync, statSync, existsSync } = require('node:fs')
 const { join, parse } = require('node:path')
 
+const { Mime } = require('./shared/mime.js')
+
 const { Waiter } = require('../lib/waiter/WaiterServer.js')
 const { Component } = require('../lib/lavender/Component.js')
 const { Lavender } = require('../lib/lavender/Lavender.js')
@@ -8,11 +10,13 @@ const { Lavender } = require('../lib/lavender/Lavender.js')
 class App {
     server
     lavender
+    assets
 
     constructor() {
         this.server = new Waiter()
-
         this.lavender = new Lavender()
+
+        this.assets = {}
 
         return this
     }
@@ -83,6 +87,25 @@ class App {
 
             this.lavender.register(compName, component)
         })
+    }
+
+    loadStaticAssetsFromDir(where) {
+        console.log("app > loading static assets")
+        let files = readdirSync(where, { recursive: true })
+
+        files.forEach((f) => {
+            if (statSync(join(where, f)).isDirectory()) return
+
+            let basePart = parse(f).dir + "/" + parse(f).name
+            let assetExt = parse(f).ext
+            let assetPath = basePart + assetExt
+            console.log(`app/static > Importing asset ${assetPath}`)
+
+            let assetContent = readFileSync(join(where, assetPath), { encoding: "utf8" })
+            this.assets[assetPath] = new Blob([assetContent], { type: Mime.fromExt(assetExt) || "application/octet-stream" })
+        })
+
+        console.log(this.assets)
     }
 }
 
