@@ -1,5 +1,4 @@
 const { RouteLeaf } = require("../../lib/waiter/RouteTree")
-const { Mime } = require('../shared/mime')
 
 module.exports.HomePageRoute = new RouteLeaf(
     "/",
@@ -12,7 +11,13 @@ module.exports.HomePageRoute = new RouteLeaf(
             return req
         }
     },
-)
+).use((data) => {
+    if (data.request.url.startsWith("/api")) {
+        data.contentType = "application/json; charset=utf-8"
+    } else {
+        data.contentType = "text/html; charset=utf-8"
+    }
+})
 
 module.exports.StaticAssetRoute = new RouteLeaf(
     "/static/+path",
@@ -21,7 +26,7 @@ module.exports.StaticAssetRoute = new RouteLeaf(
             let asset = Verbiage.assets[data.args.path]
 
             data.contentType = asset.type
-            data.body = await asset.text()
+            data.body = await asset.bytes()
 
             return data
         }
@@ -39,7 +44,6 @@ module.exports.PageTestRoute = new RouteLeaf(
             //console.log(rendered)
 
             data.body = rendered.html
-            data.contentType = "text/html; charset=utf-8"
             return data
         }
     },
