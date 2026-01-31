@@ -102,10 +102,8 @@ class App {
             console.log(`app/static > Importing asset ${assetPath}`)
 
             let assetContent = readFileSync(join(where, assetPath), { encoding: "utf8" })
-            this.assets[assetPath] = new Blob([assetContent], { type: Mime.fromExt(assetExt) || "application/octet-stream" })
+            this.assets[assetPath] = new Blob([assetContent], { type: Mime.fromExt(assetExt) })
         })
-
-        console.log(this.assets)
     }
 }
 

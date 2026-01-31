@@ -1,7 +1,7 @@
 class Mime {
     static extToMime = {
         "js": "text/javascript",
-        "css": "application/css",
+        "css": "text/css",
         "ico": "image/vnd.microsoft.icon",
         "png": "image/png"
     }

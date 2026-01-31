@@ -21,7 +21,7 @@ module.exports.StaticAssetRoute = new RouteLeaf(
             let asset = Verbiage.assets[data.args.path]
 
             data.contentType = asset.type
-            data.body = await asset.bytes()
+            data.body = await asset.text()
 
             return data
         }
@@ -35,10 +35,11 @@ module.exports.PageTestRoute = new RouteLeaf(
             //let rendered = Lavender.render("BaseLayout", { greeting: "Hello, World!", appRequest: data })
             let rendered = Lavender
                 .layout("BaseLayout")
-                .render("TestComponent", { greeting: "Hello, World!", appRequest: data })
+                .render("WikiPage", { greeting: "Hello, World!", appRequest: data })
             //console.log(rendered)
 
             data.body = rendered.html
+            data.contentType = "text/html; charset=utf-8"
             return data
         }
     },

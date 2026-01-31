@@ -5,8 +5,18 @@
 </head>
 
 <body>
-    <h1>Verbiage</h1>
-    <div class="content">
-        {slot}
+    <div class="main">
+        <h1 class="site-header alt-font">Verbiage</h1>
+        <p class="site-subheader alt-font">subheader</p>
+        <div class="content">
+            <div class="breadcrumbs-holder alt-font">
+                <a href="/" class="breadcrumb">📁 home</a>
+                <p class="breadcrumbs-arrow">»</p>
+                <a href="/" class="breadcrumb">📁 blog</a>
+                <p class="breadcrumbs-arrow">»</p>
+                <a href="/" class="breadcrumb breadcrumb-current">📝 thing.md</a>
+            </div>
+            <div class="content-body">{slot}</div>
+        </div>
     </div>
 </body>
