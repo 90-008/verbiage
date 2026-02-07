@@ -86,3 +86,11 @@ Plaintext links are converted automatically. For example: https://developer.mozi
 ``#!/bin/bash
 
 <div style="background-color: yellow; padding: 4px;"><p>Oh and you can insert (some) raw html too. And *mix* and __match__ it with markdawn syntax.</p></div>
+
+## Troublesome syntax
+
+*this is **nested** syntax*
+
+*this is syntax that goes to eol
+
+\*this is escaped syntax __with some syntax__ within*
