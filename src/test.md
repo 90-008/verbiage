@@ -85,4 +85,4 @@ Plaintext links are converted automatically. For example: https://developer.mozi
 ``console.log(stuff)
 ``#!/bin/bash
 
-<div style="background-color: yellow;"><p>Oh and you can insert (some) raw html too</p></div>
+<div style="background-color: yellow; padding: 4px;"><p>Oh and you can insert (some) raw html too. And *mix* and __match__ it with markdawn syntax.</p></div>
