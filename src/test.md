@@ -40,8 +40,8 @@ This text is a paragraph.
 
 ### Link
 
-**What you type:** `[Google](google.com)`
-**What you get:** [Google](google.com)
+**What you type:** `{{https://google.com|Google}}`
+**What you get:** {{google.com|Google}}
 
 Plaintext links are converted automatically. For example: https://developer.mozilla.org/
 
