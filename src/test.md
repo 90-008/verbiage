@@ -21,7 +21,7 @@ This text is a paragraph.
 ### Underline
 
 **What you type:** `__underline__`
-**What you get:** __italicize__
+**What you get:** __underline_
 
 ### Strikethrough
 
