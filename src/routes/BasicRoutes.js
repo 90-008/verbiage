@@ -1,4 +1,6 @@
 const { RouteLeaf } = require("../../lib/waiter/RouteTree")
+const { readFileSync } = require("fs")
+const { Markdawn } = require("../../lib/markdawn/Markdawn")
 
 module.exports.HomePageRoute = new RouteLeaf(
     "/",
@@ -37,10 +39,13 @@ module.exports.PageTestRoute = new RouteLeaf(
     "/w/:user/pages/+path",
     {
         "GET": (data) => {
+            let md = readFileSync('./src/test.md', 'utf-8')
+            let ren = new Markdawn().render(md)
+
             //let rendered = Lavender.render("BaseLayout", { greeting: "Hello, World!", appRequest: data })
             let rendered = Lavender
                 .layout("BaseLayout")
-                .render("WikiPage", { greeting: "Hello, World!", appRequest: data })
+                .render("WikiPage", { markdown: ren.content, appRequest: data })
             //console.log(rendered)
 
             data.body = rendered.html

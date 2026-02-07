@@ -30,7 +30,7 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [x] Streamed responses
 - - [x] Cookies
 - - [x] Middleware (defined in route, cascades to child routes, i.e. `requiresAuth` on `/secrets` applies to `/secrets/shh` and `/secrets/shush`)
-- - [x] Multipart form data parser
+- - [x] Multipart form data parser (todo: document!)
 - [ ] **Lavender**
 - - [X] Basic HTML parsing/substitution (be able to insert a string into the page)
 - - [X] Object traversal - `{object.property}`
@@ -39,9 +39,25 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [X] Components: HTML templates, hydration using JS
 - - [X] Fallback components
 - - [X] Use a layout to wrap around content
-- - [ ] Safe string insert (XSS-resistant)
+- - [ ] HTML Sanitization
 - - [ ] Cleanup templates (remove whitespace between html tags)
 - - [X] Better error reporting (give approximate position of a faulty expression)
+- [ ] **Markdawn**
+- - [X] Paragraph
+- - [X] Bold
+- - [X] Italics
+- - [X] Underline
+- - [X] Strikethrough
+- - [X] Highlight
+- - [X] Header
+- - [X] Unordered list
+- - [X] Ordered list
+- - [X] Inline code block
+- - [X] Code block
+- - [ ] Table
+- - [ ] Footnote
+- - [X] Links
+- - [X] Masked links
 - [ ] **Database/file driver - name TBD**
 - - [ ] --TBD--
 - [ ] **Verbiage**
@@ -73,5 +89,10 @@ More documentation for Waiter is available at `./doc/Waiter.md`
 Waiter is a component-based server-side rendering framework and templating engine. It is responsible for crafting the HTML responses to send to clients.
 
 More documentation for Lavender is available at `./doc/Lavender.md`
+
+### MarkDawn - Markdown renderer
+`./lib/markdawn`
+
+Renders markdown to HTML.
 
 \* WIP \*

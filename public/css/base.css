@@ -34,7 +34,7 @@ body {
 
 .main {
     margin: auto;
-    max-width: 55em;
+    max-width: 64em;
 }
 
 .alt-font {
@@ -103,4 +103,8 @@ body {
 
 .breadcrumb-current {
     font-weight: bold;
+}
+
+blockquote {
+    border-left: 3px solid black;
 }
