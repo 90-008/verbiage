@@ -41,7 +41,7 @@ This text is a paragraph.
 ### Link
 
 **What you type:** `{{https://google.com|Google}}`
-**What you get:** {{google.com|Google}}
+**What you get:** {{https://google.com|Google}}
 
 Plaintext links are converted automatically. For example: https://developer.mozilla.org/
 
@@ -84,3 +84,5 @@ Plaintext links are converted automatically. For example: https://developer.mozi
 **What you get:**
 ``console.log(stuff)
 ``#!/bin/bash
+
+<div style="background-color: yellow;"><p>Oh and you can insert (some) raw html too</p></div>
