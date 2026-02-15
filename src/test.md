@@ -99,6 +99,8 @@ Plaintext links are converted automatically. For example: https://developer.mozi
 
 `<p>since this is in a code block, this should be escaped</p>`
 
+*don't escape this but do escape \* this random stray asterisk*
+
 ## Troublesome sanitizer cases
 
 <iframe src="/"></iframe> iframes are not allowed so this shouldnt render
