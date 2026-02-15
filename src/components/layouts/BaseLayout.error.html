@@ -2,10 +2,11 @@
 
 <head>
     <title>Verbiage - Internal Server Error</title>
+    <link rel="stylesheet" href="/static/css/base.css">
 </head>
 
 <body>
     <h1>Internal Server Error</h1>
     <h4>HTTP 500</h4>
-    <code>{echo @_innerContent.error!}</code>
+    <code>{put self.error!}</code>
 </body>

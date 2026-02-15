@@ -52,7 +52,7 @@ module.exports.PageTestRoute = new RouteLeaf(
             //let rendered = Lavender.render("BaseLayout", { greeting: "Hello, World!", appRequest: data })
             let rendered = Lavender
                 .layout("BaseLayout")
-                .render("WikiPage", { markdown: ren.content, appRequest: data })
+                .render("WikiPage", { markdown: ren.content, appRequest: data, greeting: "Hello, <script>alert('XSS!');</script>" })
             //console.log(rendered)
 
             data.body = rendered.html
