@@ -1,6 +1,12 @@
 const { RouteLeaf } = require("../../lib/waiter/RouteTree")
 const { readFileSync } = require("fs")
 const { Markdawn } = require("../../lib/markdawn/Markdawn")
+const { Sanitizer } = require("../../lib/lavender/Lavender")
+
+const sanitizer = new Sanitizer({
+    allowedTags: ["p", "a", "b", "i", "div"],
+    allowedAttributes: ["href", "style", "class"]
+})
 
 module.exports.HomePageRoute = new RouteLeaf(
     "/",
@@ -40,7 +46,8 @@ module.exports.PageTestRoute = new RouteLeaf(
     {
         "GET": (data) => {
             let md = readFileSync('./src/test.md', 'utf-8')
-            let ren = new Markdawn().render(md)
+            let mdSanitized = sanitizer.sanitize(md)
+            let ren = new Markdawn().render(mdSanitized)
 
             //let rendered = Lavender.render("BaseLayout", { greeting: "Hello, World!", appRequest: data })
             let rendered = Lavender

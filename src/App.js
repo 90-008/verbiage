@@ -5,7 +5,7 @@ const { Mime } = require('./shared/mime.js')
 
 const { Waiter } = require('../lib/waiter/WaiterServer.js')
 const { Component } = require('../lib/lavender/Component.js')
-const { Lavender } = require('../lib/lavender/Lavender.js')
+const { Lavender, Sanitizer } = require('../lib/lavender/Lavender.js')
 
 class App {
     server

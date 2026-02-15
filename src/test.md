@@ -94,3 +94,13 @@ Plaintext links are converted automatically. For example: https://developer.mozi
 *this is syntax that goes to eol
 
 \*this is escaped syntax __with some syntax__ within*
+
+\*this is escaped syntax that goes to eol
+
+## Troublesome sanitizer cases
+
+<iframe src="/"></iframe> iframes are not allowed so this shouldnt render
+
+<a href="https://example.com" onmouseover="alert('XSS!');">this is a raw link that works but has a forbidden attribute that should be cleaned</a>
+
+<b>the second closing tag should be escaped</b> right here --> </b> <--
