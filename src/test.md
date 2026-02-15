@@ -97,6 +97,8 @@ Plaintext links are converted automatically. For example: https://developer.mozi
 
 \*this is escaped syntax that goes to eol
 
+`<p>since this is in a code block, this should be escaped</p>`
+
 ## Troublesome sanitizer cases
 
 <iframe src="/"></iframe> iframes are not allowed so this shouldnt render

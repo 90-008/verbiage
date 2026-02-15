@@ -47,7 +47,7 @@ module.exports.PageTestRoute = new RouteLeaf(
         "GET": (data) => {
             let md = readFileSync('./src/test.md', 'utf-8')
             let mdSanitized = sanitizer.sanitize(md)
-            let ren = new Markdawn().render(mdSanitized)
+            let ren = new Markdawn({ escaperFunction: Sanitizer.escape }).render(mdSanitized)
 
             //let rendered = Lavender.render("BaseLayout", { greeting: "Hello, World!", appRequest: data })
             let rendered = Lavender
