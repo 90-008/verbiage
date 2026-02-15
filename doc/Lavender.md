@@ -67,8 +67,15 @@ Syntax features:
 
 The echo expression takes input from a symbol and inserts it into the document body directly. It **does not sanitize** the incoming string whatsoever, making it a good fit for situations like writing the output of a Markdown-to-HTML parser, but a bad fit for general user input.
 
+## III.II. Put expression
 
-## III.II. If expression
+```html
+<p>{put user.biography}</p>
+```
+
+The put expression takes input from a symbol and inserts it into the document body, escaping potentially dangerous HTML characters on the way. This uses the sanitizer with default settings. For advanced sanitization, sanitize the input manually and use `echo`. (see the Sanitization section for more info)
+
+## III.III. If expression
 
 ```html
 {if something}
@@ -84,7 +91,7 @@ The echo expression takes input from a symbol and inserts it into the document b
 
 The if expression takes input from a symbol and checks it for truthiness (according to JavaScript guidelines). If it's truthy, the template contained within will be executed. An `{else}` expression may also be provided to execute a different block should the symbol be falsy.
 
-## III.III. For expression
+## III.IV. For expression
 
 ```html
 <ul>
@@ -96,7 +103,7 @@ The if expression takes input from a symbol and checks it for truthiness (accord
 
 The for expression takes the input of an iterable symbol and an iterator name, respectively. The template contained within is executed once for each item, with the current item available for querying under the chosen iterator name.
 
-## III.IV. Render expression
+## III.V. Render expression
 
 ```html
 {render MyComponent}
@@ -161,4 +168,44 @@ Application logic:
 let rendered = Lavender
         .layout("BaseLayout")
         .render("WikiPage", { currentUser: { ... }, wikiPage: { ... } }, false)
+```
+
+# VI. Sanitization
+
+The `Sanitizer` class provides utilities for sanitizing user input.
+
+## Escaping text
+
+The `escape()` method escapes potentially dangerous characters, turning arbitrary user input into insertable HTML character-encoded strings. `escapes` is an array of `[replaceWhat, replaceWith]` pairs. If `escapes` is not provided, it'll use the default set of replacers. It is a static method, so it must be called on Sanitizer directly.
+
+```js
+Sanitizer.escape("<script>alert('XSS!');</script>") // --> &lt;script&gt;alert('XSS!');&lt;/script&gt;
+
+Sanitizer.escape("this ampersand will be replaced: &", [ ["&", "&amp;"] ])
+```
+
+## Creating a Sanitizer instance
+
+Call `new Sanitizer(options)` to create a sanitizer instance. The `options` object takes the following values:
+- `allowedTags` - Allowed HTML element names. For example `["p", "b", "i", "h5"]`.
+- `allowedAttributes` - Allowed HTML attribute names. For example `["style", "href", "src", "class"]`.
+- `escapes` - Replacers for escaping characters. For example `[ ["&", "&amp;"] ]`. The provided replacers will be merged together with the default.
+
+These options control how this Sanitizer instance will treat input when sanitizing. HTML tags with element names not in the allowlist will be escaped, and attributes with names not in the allowlist will be stripped away.
+
+## Sanitizing input
+
+The `sanitize()` method allows sanitizing arbitrary text input by escaping and stripping HTML tags according to this instance's configuration.
+
+Consider this example input and output which assumes `a` is an allowed element name, and `href` an allowed attribute.
+
+Example input:
+```
+<a href="https://example.com" onmouseover="alert(1);">This link is valid but has a bad attribute to be stripped</a> You can mix HTML with plain text here. <iframe>And this shouldn't be allowed at all</iframe>
+```
+
+Example output:
+
+```
+<a href="https://example.com">This link is valid but has a bad attribute to be stripped</a> You can mix HTML with plain text here. &lt;iframe&gt;And this shouldn't be allowed at all&lt;&sol;iframe&gt;
 ```
