@@ -39,7 +39,7 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [X] Components: HTML templates, hydration using JS
 - - [X] Fallback components
 - - [X] Use a layout to wrap around content
-- - [ ] HTML Sanitization
+- - [X] HTML Sanitization
 - - [ ] Cleanup templates (remove whitespace between html tags)
 - - [X] Better error reporting (give approximate position of a faulty expression)
 - [ ] **Markdawn**
