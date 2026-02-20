@@ -1,0 +1,6 @@
+{
+    "ext": "ts,js,md,html,css",
+    "ignore": [
+        "data"
+    ]
+}
