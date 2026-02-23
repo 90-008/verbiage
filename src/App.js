@@ -107,9 +107,9 @@ class App {
     }
 
     load() {
-        app.loadRoutesFromDir(join(__dirname, '../src/routes'))
-        app.loadComponentsFromDir(join(__dirname, '../src/components'))
-        app.loadStaticAssetsFromDir(join(__dirname, '../public'))
+        this.loadRoutesFromDir(join(__dirname, '../src/routes'))
+        this.loadComponentsFromDir(join(__dirname, '../src/components'))
+        this.loadStaticAssetsFromDir(join(__dirname, '../public'))
 
         return this
     }
