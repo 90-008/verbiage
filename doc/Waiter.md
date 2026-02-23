@@ -21,6 +21,8 @@ const { Waiter } = require('./WaiterServer.js')
 var serv = new Waiter()
 ```
 
+The constructor takes one argument, representing a "meta" object that will be passed to all middlewares and routes as the second argument. This can be used for things like passing state or your application instance to your routes.
+
 ### I.II. Generic parameters
 
 Generic params are accessed through the `args` property of the `AppRequest`, where each param is a key-value pair where the key is the param name and the value is the parsed contents of the param. Waiter supports two types of generic parameters:
