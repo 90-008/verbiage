@@ -13,8 +13,6 @@ The Component class constructor takes three arguments:
 * The hydrator functions to use. It expects an object with two function properties: `base` (required), and `fallback` (optional).
 * The Lavender app instance to bind to for accessing the component registry of that instance (optional).
 
-Note that within Verbiage, `Lavender` is registered as a global variable.
-
 ## I.II. Component structure
 
 Components are scanned for in the `/src/components` directory. Each component is made up of two parts: a .html file containing the template, and an optional .js file containing the hydration logic. Both parts must be in the same directory and must have the same file name (except the extension).
