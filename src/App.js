@@ -105,6 +105,14 @@ class App {
             this.assets[assetPath] = new Blob([assetContent], { type: Mime.fromExt(assetExt) })
         })
     }
+
+    load() {
+        app.loadRoutesFromDir(join(__dirname, '../src/routes'))
+        app.loadComponentsFromDir(join(__dirname, '../src/components'))
+        app.loadStaticAssetsFromDir(join(__dirname, '../public'))
+
+        return this
+    }
 }
 
 module.exports.App = App
