@@ -13,7 +13,7 @@ class App {
     assets
 
     constructor() {
-        this.server = new Waiter()
+        this.server = new Waiter(this)
         this.lavender = new Lavender()
 
         this.assets = {}

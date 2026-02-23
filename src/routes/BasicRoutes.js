@@ -30,8 +30,8 @@ module.exports.HomePageRoute = new RouteLeaf(
 module.exports.StaticAssetRoute = new RouteLeaf(
     "/static/+path",
     {
-        "GET": async (data) => {
-            let asset = Verbiage.assets[data.args.path]
+        "GET": async (data, { assets }) => {
+            let asset = assets[data.args.path]
 
             data.contentType = asset.type
             data.body = await asset.bytes()
@@ -44,13 +44,13 @@ module.exports.StaticAssetRoute = new RouteLeaf(
 module.exports.PageTestRoute = new RouteLeaf(
     "/w/:user/pages/+path",
     {
-        "GET": (data) => {
+        "GET": (data, { lavender }) => {
             let md = readFileSync('./src/test.md', 'utf-8')
             let mdSanitized = sanitizer.sanitize(md)
             let ren = new Markdawn({ escaperFunction: Sanitizer.escape }).render(mdSanitized)
 
             //let rendered = Lavender.render("BaseLayout", { greeting: "Hello, World!", appRequest: data })
-            let rendered = Lavender
+            let rendered = lavender
                 .layout("BaseLayout")
                 .render("WikiPage", { markdown: ren.content, appRequest: data, greeting: "Hello, <script>alert('XSS!');</script>" })
             //console.log(rendered)
