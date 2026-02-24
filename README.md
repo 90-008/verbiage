@@ -72,6 +72,7 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - - [ ] isDirectory
 - - - [ ] Upsert file
 - - - [ ] Append file
+- - - [ ] Move/rename file
 - - - [ ] Test permissions
 - - - [ ] Open read stream
 - - - [ ] Open write stream
@@ -83,6 +84,7 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - - [ ] Deserialize
 - - - [ ] Serialize
 - - - [ ] Append
+- - - [ ] Delete
 - - - [ ] Limit result count
 - - - [ ] Order results by given property
 - - - [ ] Query based on greater-than/less-than
@@ -93,10 +95,19 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [ ] Arbitrary file upload
 - - [ ] File listing view
 - - [ ] Media gallery view
+- - [ ] Search
+- - [ ] Custom sidebar
+- - [ ] Custom CSS/favicon
 - - [ ] Multi-user
 - - - [ ] Login/auth
 - - - [ ] Permission system
 - - [ ] Multi-wiki
+- - [ ] Audit logs / activity tab
+- - [ ] Discussions
+- - [ ] Custom markdown features
+- - - [ ] Emotes
+- - - [ ] Wiki links - [[(?namespace:)(path|$alias)]]
+- - [ ] Aliases - set up permanent links to files, for example `my_blog_post -> /blog/2026/post.md`
 
 ## Install / Setup
 1. Clone the repo.
