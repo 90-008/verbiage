@@ -77,6 +77,7 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - - [ ] Check if directory has a child filename (from directory object)
 - - - [ ] Stat file (from file object)
 - - - [ ] Get ancestry (return array of /home, /home/foo, /home/foo/bar.bin)
+- - - [ ] Get entire file tree
 - - [ ] Bag - queryable map of objects serialized to JSON lines
 - - - [ ] Deserialize
 - - - [ ] Serialize
