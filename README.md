@@ -71,6 +71,7 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - - [ ] Delete file
 - - - [ ] isDirectory
 - - - [ ] Upsert file
+- - - [ ] Append file
 - - - [ ] Test permissions
 - - - [ ] Open read stream
 - - - [ ] Open write stream
