@@ -58,8 +58,34 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [ ] Footnote
 - - [X] Links
 - - [X] Masked links
-- [ ] **Database/file driver - name TBD**
-- - [ ] --TBD--
+- - [ ] Extract facets from markdown (eg. TOC, document title, excerpt...)
+- [ ] **Cabinet**
+- - [ ] Cache file tree
+- - [ ] Cache file contents
+- - [ ] Watch for new files and add to tree
+- - [ ] File ops
+- - - [ ] Check if exists
+- - - [ ] Stat file
+- - - [ ] Write file
+- - - [ ] Read file
+- - - [ ] Delete file
+- - - [ ] isDirectory
+- - - [ ] Upsert file
+- - - [ ] Test permissions
+- - - [ ] Open read stream
+- - - [ ] Open write stream
+- - - [ ] Check if directory has a child filename (from directory object)
+- - - [ ] Stat file (from file object)
+- - - [ ] Get ancestry (return array of /home, /home/foo, /home/foo/bar.bin)
+- - [ ] Bag - queryable map of objects serialized to JSON lines
+- - - [ ] Deserialize
+- - - [ ] Serialize
+- - - [ ] Append
+- - - [ ] Limit result count
+- - - [ ] Order results by given property
+- - - [ ] Query based on greater-than/less-than
+- - - [ ] Query based on property equality
+- - - [ ] Query based on arbitrary function
 - [ ] **Verbiage**
 - - [ ] CRUD wiki pages
 - - [ ] Arbitrary file upload
@@ -95,4 +121,11 @@ More documentation for Lavender is available at `./doc/Lavender.md`
 
 Renders markdown to HTML.
 
-\* WIP \*
+### Cabinet - Storage provider
+`./lib/cabinet`
+
+Cabinet implements utilities for file storage, writing, and retrieval.
+
+The first component is the StorageManager class, which can be mounted to any given directory and provides a cached view of the file tree as well as optionally the contents of certain files, with some helper functions.
+
+The second component is the Bag class, which provides a mechanism for serializing, deserializing, and querying JSONL files.
