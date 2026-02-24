@@ -5,7 +5,7 @@ const { Mime } = require('./shared/mime.js')
 
 const { Waiter } = require('../lib/waiter/WaiterServer.js')
 const { Component } = require('../lib/lavender/Component.js')
-const { Lavender } = require('../lib/lavender/Lavender.js')
+const { Lavender, Sanitizer } = require('../lib/lavender/Lavender.js')
 const { StorageManager } = require('../lib/cabinet/Cabinet.js')
 
 class App {
@@ -13,6 +13,7 @@ class App {
     lavender
     assets
     storage
+    sanitizer
 
     constructor() {
         this.server = new Waiter(this)
@@ -21,6 +22,11 @@ class App {
         this.assets = {}
 
         this.storage = new StorageManager(join(__dirname, '../data'))
+
+        this.sanitizer = new Sanitizer({
+            allowedTags: ["p", "a", "b", "i", "div"],
+            allowedAttributes: ["href", "style", "class"]
+        })
 
         return this
     }
