@@ -18,8 +18,10 @@
         <h4 class="alt-font">Files</h4>
         <ul>
             {for @currentDir.itemsArray item}
-            <li><a href="/{put @currentWiki}/w/{put item.pathStripped}">{put item.name}</a>
-                {if item.isDirectory}(dir){end}</li>
+            <li>
+                {if item.isDirectory}📁{else}📝{end}
+                <a href="/{put @currentWiki}/w/{put item.pathStripped}">{put item.name}</a>
+            </li>
             {end}
         </ul>
     </div>
