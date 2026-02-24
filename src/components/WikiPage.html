@@ -1,8 +1,26 @@
 <div class="page">
+    {if @isFile}
     <article>{echo @markdown}</article>
+    {else}
+    <article>{echo @markdown}</article>
+    <hr>
+    <h2>Files</h2>
+    <ul>
+        {for @currentDir.itemsArray item}
+        <li><a href="/{put @currentWiki}/w/{put item.pathStripped}">{put item.name}</a>
+            {if item.isDirectory}(dir){end}</li>
+        {end}
+    </ul>
+    {end}
 </div>
 <div class="side-panel">
     <div class="side-panel-inner">
-        <p>stuff here</p>
+        <h4 class="alt-font">Files</h4>
+        <ul>
+            {for @currentDir.itemsArray item}
+            <li><a href="/{put @currentWiki}/w/{put item.pathStripped}">{put item.name}</a>
+                {if item.isDirectory}(dir){end}</li>
+            {end}
+        </ul>
     </div>
 </div>

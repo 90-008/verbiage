@@ -95,10 +95,19 @@ body {
     color: #4574e3;
 }
 
-.breadcrumbs-arrow {
+.breadcrumb:not(.breadcrumb-current)::after {
+    content: "»";
     margin: 0;
+    margin-left: 0px;
+    margin-left: 0px;
+    margin-left: 0.55em;
     pointer-events: none;
-    font-size: x-large;
+    font-size: 1.3em;
+    color: #313131;
+    font-weight: initial;
+    display: inline-block;
+    height: 0px;
+    vertical-align: top;
 }
 
 .breadcrumb-current {

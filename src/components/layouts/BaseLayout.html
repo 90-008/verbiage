@@ -8,15 +8,9 @@
 <body>
     <div class="main">
         <h1 class="site-header alt-font">Verbiage</h1>
-        <p class="site-subheader alt-font">{put @greeting!}</p>
+        <p class="site-subheader alt-font">Subheader</p>
         <div class="content">
-            <div class="breadcrumbs-holder alt-font">
-                <a href="/" class="breadcrumb">📁 home</a>
-                <p class="breadcrumbs-arrow">»</p>
-                <a href="/" class="breadcrumb">📁 blog</a>
-                <p class="breadcrumbs-arrow">»</p>
-                <a href="/" class="breadcrumb breadcrumb-current">📝 thing.md</a>
-            </div>
+            {if @ancestry}{render Breadcrumbs}{end}
             <div class="content-body">{slot}</div>
         </div>
     </div>

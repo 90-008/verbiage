@@ -5,18 +5,22 @@ const { Mime } = require('./shared/mime.js')
 
 const { Waiter } = require('../lib/waiter/WaiterServer.js')
 const { Component } = require('../lib/lavender/Component.js')
-const { Lavender, Sanitizer } = require('../lib/lavender/Lavender.js')
+const { Lavender } = require('../lib/lavender/Lavender.js')
+const { StorageManager } = require('../lib/cabinet/Cabinet.js')
 
 class App {
     server
     lavender
     assets
+    storage
 
     constructor() {
         this.server = new Waiter(this)
         this.lavender = new Lavender()
 
         this.assets = {}
+
+        this.storage = new StorageManager(join(__dirname, '../data'))
 
         return this
     }

@@ -60,25 +60,25 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [X] Masked links
 - - [ ] Extract facets from markdown (eg. TOC, document title, excerpt...)
 - [ ] **Cabinet**
-- - [ ] Cache file tree
-- - [ ] Cache file contents
+- - [X] Cache file tree
+- - [X] Cache file contents
 - - [ ] Watch for new files and add to tree
 - - [ ] File ops
-- - - [ ] Check if exists
+- - - [X] Check if exists
 - - - [ ] Stat file
 - - - [ ] Write file
-- - - [ ] Read file
+- - - [X] Read file
 - - - [ ] Delete file
-- - - [ ] isDirectory
+- - - [X] isDirectory
 - - - [ ] Upsert file
 - - - [ ] Append file
 - - - [ ] Move/rename file
 - - - [ ] Test permissions
 - - - [ ] Open read stream
 - - - [ ] Open write stream
-- - - [ ] Check if directory has a child filename (from directory object)
-- - - [ ] Stat file (from file object)
-- - - [ ] Get ancestry (return array of /home, /home/foo, /home/foo/bar.bin)
+- - - [X] Check if directory has a child filename (from directory object)
+- - - [X] Stat file (from file object)
+- - - [X] Get ancestry (return array of /home, /home/foo, /home/foo/bar.bin)
 - - - [ ] Get entire file tree
 - - [ ] Bag - queryable map of objects serialized to JSON lines
 - - - [ ] Deserialize

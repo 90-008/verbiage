@@ -42,18 +42,47 @@ module.exports.StaticAssetRoute = new RouteLeaf(
 )
 
 module.exports.PageTestRoute = new RouteLeaf(
-    "/w/:user/pages/+path",
+    "/:wiki/w/+path",
     {
-        "GET": (data, { lavender }) => {
-            let md = readFileSync('./src/test.md', 'utf-8')
+        "GET": (data, { lavender, storage }) => {
+            let { file, ancestry } = storage.dig(data.args.path)
+            if (!file) {
+                data.status = 404
+                return data
+            }
+
+            let currentDir = ancestry.findLast(fil => fil.isDirectory)
+            currentDir.list()
+
+            let isDirectory = file.isDirectory
+            let document
+            if (!isDirectory) {
+                document = file.read().content.toString('utf8')
+            } else {
+                document = file.tryGetChild("README.md")?.read().content.toString('utf8')
+            }
+
+            if (document == null) {
+                let newLink = currentDir.path == "/"
+                    ? `/${data.args.wiki}/w/README.md?action=new`
+                    : `/${data.args.wiki}/w/${currentDir.path}/README.md?action=new`
+                document = `*This directory has no readme file.* {{${newLink}|Click here to create one}}.`
+            }
+
+            let md = document
             let mdSanitized = sanitizer.sanitize(md)
             let ren = new Markdawn({ escaperFunction: Sanitizer.escape }).render(mdSanitized)
 
-            //let rendered = Lavender.render("BaseLayout", { greeting: "Hello, World!", appRequest: data })
             let rendered = lavender
                 .layout("BaseLayout")
-                .render("WikiPage", { markdown: ren.content, appRequest: data, greeting: "Hello, <script>alert('XSS!');</script>" })
-            //console.log(rendered)
+                .render("WikiPage",
+                    {
+                        markdown: ren.content,
+                        ancestry: ancestry,
+                        currentDir: currentDir,
+                        currentWiki: data.args.wiki,
+                        isFile: !isDirectory
+                    })
 
             data.body = rendered.html
             return data
