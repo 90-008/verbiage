@@ -21,7 +21,9 @@ class App {
 
         this.assets = {}
 
-        this.storage = new StorageManager(join(__dirname, '../data'))
+        this.storage = new StorageManager(join(__dirname, '../data'), {
+            mimeFunction: Mime.fromFileName
+        })
 
         this.sanitizer = new Sanitizer({
             allowedTags: ["p", "a", "b", "i", "div"],
