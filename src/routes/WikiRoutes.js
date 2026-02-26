@@ -1,5 +1,11 @@
 const { RouteLeaf } = require("../../lib/waiter/RouteTree")
 
+function canDelete(file) {
+    if (file.isRoot) return false
+
+    return true
+}
+
 module.exports.ViewWikiPageRoute = new RouteLeaf(
     "/:wiki/w/+path",
     {
@@ -45,12 +51,34 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
 
             let fileName = data.searchParams.get("name") || ""
 
-            let rendered = lavender
+            let rendered
+            let actionCheck
+            let action = data.searchParams.get("action") || "edit"
+
+            switch (action) {
+                case "delete":
+                    if (cwd.tryGetChild(fileName) == null) { // TODO: proper error page
+                        data.status = 404
+                        return data
+                    }
+
+                    action = "delete"
+                    actionCheck = canDelete
+                    break
+                default:
+                    action = "edit"
+                    actionCheck = () => { return true }
+                    break
+            }
+
+            rendered = lavender
                 .layout("BaseLayout")
                 .render("EditWikiPage",
                     {
                         ancestry: ancestry,
                         fileName: fileName,
+                        action: action,
+                        hasPermission: actionCheck,
                         currentWiki: data.args.wiki,
                         currentDir: cwd
                     }, false)
@@ -61,16 +89,43 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
         "POST": async (data, { storage }) => {
             let form = await data.formData()
 
-            let { filename, content } = form.fields
-            if (!filename && !content) { // TODO: proper error page
-                data.status = 400
-                return data
+            let action = data.searchParams.get("action") || "edit"
+
+            switch (action) {
+                case "delete":
+                    let fileName = data.searchParams.get("name")
+                    let file = storage.dig(data.args.path).file
+
+                    if (!file || !file.tryGetChild(fileName)) { // TODO: proper error page
+                        data.status = 400
+                        return data
+                    }
+
+                    if (!canDelete(file.tryGetChild(fileName))) { // TODO: proper error page
+                        data.status = 400
+                        return data
+                    }
+
+                    storage.delete(data.args.path, fileName)
+
+                    data.status = 302
+                    data.setHead("Location", `/${data.args.wiki}/w/${data.args.path}`)
+                    break
+                default:
+                    if (!form) { data.status = 400; return data }
+
+                    let { filename, content } = form.fields
+                    if (!filename || !content) { // TODO: proper error page
+                        data.status = 400
+                        return data
+                    }
+
+                    let newFile = storage.upsert(data.args.path, filename.body.toString('utf8'), content.body)
+
+                    data.status = 302
+                    data.setHead("Location", `/${data.args.wiki}/w/${newFile.pathStripped}`)
+                    break
             }
-
-            let newFile = storage.upsert(data.args.path, filename.body.toString('utf8'), content.body)
-
-            data.status = 302
-            data.setHead("Location", `/${data.args.wiki}/w/${newFile.pathStripped}`)
 
             return data
         }

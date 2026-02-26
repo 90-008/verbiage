@@ -8,11 +8,18 @@
             class="button-primary button-compact linkbutton">edit</a>
         <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}?dl=1"
             class="button-primary button-compact linkbutton">download</a>
+        <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}&action=delete"
+            class="button-danger button-compact linkbutton">delete</a>
     </div>
     {end}
     {if self.fileType.directory}
     <article class="markdown">{echo self.markdown.content}</article>
     <hr>
+    <div class="inline-toolbox">
+        <h4 class="alt-font">Tools</h4>
+        <a href="/{put @currentWiki}/edit/{echo @currentDir.pathAncestor}?name={echo @currentFile.name}&action=delete"
+            class="button-danger button-compact linkbutton">delete</a>
+    </div>
     <h2>Files</h2>
     <ul>
         {for self.fileList item}

@@ -1,6 +1,13 @@
 <div class="page">
+    {if self.editMode}
     <h2 class="alt-font">Edit File</h2>
+    {end}
+    {if self.deleteMode}
+    <h2 class="alt-font">Confirm Deletion</h2>
+    {end}
     <hr>
+    {if self.hasPermission}
+    {if self.upsertMode}
     <form class="simple-form" method="post" enctype="multipart/form-data">
         {if @content}
         <div class="notice">You are editing an existing file. Changes will overwrite this file if submitted. If you
@@ -16,4 +23,23 @@
             <button class="button-primary">Submit</button>
         </div>
     </form>
+    {end}
+    {if self.deleteMode}
+    <form class="simple-form" method="post">
+        <p>Are you sure you want to delete <b>{put @currentDir.pathNormalized}{put @fileName}</b>? This is irreversible.
+        </p>
+        <div class="form-buttons">
+            <a href="/{put @currentWiki}/w/{put @currentDir.pathNormalized}">Go back</a>
+            <button class="button-danger">Delete</button>
+        </div>
+    </form>
+    {end}
+    {else}
+    <div class="simple-form">
+        <p>You don't have permission to perform this action on this item.</p>
+        <div class="form-buttons">
+            <a href="/{put @currentWiki}/w/{put @currentDir.pathNormalized}">Go back</a>
+        </div>
+    </div>
+    {end}
 </div>

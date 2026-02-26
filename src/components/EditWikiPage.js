@@ -1,11 +1,18 @@
 module.exports.hydrate = ({
     fileName,
     currentDir,
+    action,
+    hasPermission
 }) => {
     let existingFile = fileName ? currentDir.tryGetChild(fileName) : null
-    let existingContent = existingFile?.read().content || ""
+    let existingContent
+    if (!existingFile.isDirectory) existingContent = existingFile?.read().content || ""
 
     return {
-        content: existingContent
+        content: existingContent,
+        editMode: action == "edit",
+        upsertMode: action == "edit",
+        deleteMode: action == "delete",
+        hasPermission: hasPermission(existingFile)
     }
 }
