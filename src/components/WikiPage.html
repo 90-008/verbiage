@@ -1,14 +1,15 @@
 <div class="page">
-    {if @isFile}
-    <article class="markdown">{echo @markdown}</article>
+    {if self.fileType.document}
+    <article class="markdown">{echo self.markdown.content}</article>
     <hr>
     <div class="inline-toolbox">
         <h4 class="alt-font">Tools</h4>
         <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}"
             class="button-primary button-compact linkbutton">edit</a>
     </div>
-    {else}
-    <article class="markdown">{echo @markdown}</article>
+    {end}
+    {if self.fileType.directory}
+    <article class="markdown">{echo self.markdown.content}</article>
     <hr>
     <h2>Files</h2>
     <ul>
