@@ -65,12 +65,12 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [ ] Watch for new files and add to tree
 - - [ ] File ops
 - - - [X] Check if exists
-- - - [ ] Stat file
-- - - [ ] Write file
+- - - [X] Stat file
+- - - [X] Write file
 - - - [X] Read file
 - - - [ ] Delete file
 - - - [X] isDirectory
-- - - [ ] Upsert file
+- - - [X] Upsert file
 - - - [ ] Append file
 - - - [ ] Move/rename file
 - - - [ ] Test permissions

@@ -24,8 +24,8 @@ module.exports.ViewWikiPageRoute = new RouteLeaf(
 
             if (document == null) {
                 let newLink = currentDir.path == "/"
-                    ? `/${data.args.wiki}/new?name=README.md`
-                    : `/${data.args.wiki}/new/${currentDir.path}?name=README.md`
+                    ? `/${data.args.wiki}/edit/~?name=README.md`
+                    : `/${data.args.wiki}/edit/${currentDir.path}?name=README.md`
                 document = `*This directory has no readme file.* {{${newLink}|Click here to create one}}.`
             }
 
