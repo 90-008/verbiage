@@ -64,10 +64,7 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                 return data
             }
 
-            // TODO: abstract this away in waiter
-            let searchParams = new URL(`http://${data.request.headers["host"]}/${data.request.url}`).searchParams
-
-            let fileName = searchParams.get("name") || ""
+            let fileName = data.searchParams.get("name") || ""
 
             let existingFile = fileName ? cwd.tryGetChild(fileName) : null
             let existingContent = existingFile?.read().content || ""
