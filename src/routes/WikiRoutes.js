@@ -19,7 +19,7 @@ module.exports.ViewWikiPageRoute = new RouteLeaf(
             if (!isDirectory) {
                 document = file.read().content.toString('utf8')
             } else {
-                document = file.tryGetChild("README.md")?.read().content.toString('utf8')
+                document = file.tryGetChild("readme.md", false)?.read().content.toString('utf8')
             }
 
             if (document == null) {
