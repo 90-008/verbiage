@@ -54,12 +54,14 @@ body {
 
 .site-header {
     margin-bottom: 0.2em;
+    color: var(--text-main);
 }
 
 .site-subheader {
     margin: 0;
     font-style: italic;
     margin-bottom: 1.25em;
+    color: var(--text-main);
 }
 
 .content {
