@@ -1,6 +1,12 @@
 <div class="page">
     {if @isFile}
     <article class="markdown">{echo @markdown}</article>
+    <hr>
+    <div class="inline-toolbox">
+        <h4 class="alt-font">Tools</h4>
+        <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}"
+            class="button-primary button-compact linkbutton">edit</a>
+    </div>
     {else}
     <article class="markdown">{echo @markdown}</article>
     <hr>
@@ -8,7 +14,7 @@
     <ul>
         {for @currentDir.itemsPresentable item}
         <li>
-            <a href="/{put @currentWiki}/w/{put item.pathStripped}">
+            <a href="/{put @currentWiki}/w/{echo item.pathStripped}">
                 {if item.isDirectory}📁{else}📝{end} {put item.name}
             </a>
         </li>
@@ -18,15 +24,21 @@
 </div>
 <div class="side-panel">
     <div class="side-panel-inner">
-        <h4 class="alt-font">Files</h4>
-        <ul class="sidebar-file-list">
-            {for @currentDir.itemsPresentable item}
-            <li class="sidebar-file">
-                <a href="/{put @currentWiki}/w/{put item.pathStripped}">
-                    {if item.isDirectory}📁{else}📝{end} {put item.name}
-                </a>
-            </li>
-            {end}
-        </ul>
+        <div class="sidebar-toolbox">
+            <div class="toolbox-header">
+                <h4 class="alt-font">Files</h4>
+                <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}"
+                    class="button-primary button-compact linkbutton">new</a>
+            </div>
+            <ul class="sidebar-file-list">
+                {for @currentDir.itemsPresentable item}
+                <li class="sidebar-file">
+                    <a href="/{put @currentWiki}/w/{echo item.pathStripped}">
+                        {if item.isDirectory}📁{else}📝{end} {put item.name}
+                    </a>
+                </li>
+                {end}
+            </ul>
+        </div>
     </div>
 </div>

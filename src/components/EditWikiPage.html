@@ -1,0 +1,19 @@
+<div class="page">
+    <h2 class="alt-font">Edit File</h2>
+    <hr>
+    <form class="simple-form" method="post" enctype="multipart/form-data">
+        {if @content}
+        <div class="notice">You are editing an existing file. Changes will overwrite this file if submitted. If you
+            change the file name field, a new file will be created.</div>
+        {end}
+        <b>{put @currentDir.pathNormalized}</b>
+        <input name="filename" type="text" placeholder="File name" value="{put @fileName}" required>
+        <div class="form-group">
+            <label for="content">Content</label>
+            <textarea class="textarea-prose" name="content" placeholder="File content">{put @content}</textarea>
+        </div>
+        <div class="form-buttons">
+            <button class="button-primary">Submit</button>
+        </div>
+    </form>
+</div>

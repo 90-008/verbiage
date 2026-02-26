@@ -9,6 +9,9 @@ body {
     --border-2: #7b7b7b;
     --accent: #3367e1;
     --accent-alt: #861cf0;
+    --gradient-primary: linear-gradient(to bottom, #0af, #006bdf);
+    --gradient-warning: linear-gradient(to bottom, #ffa700, #df7503);
+    --gradient-danger: linear-gradient(to bottom, #cc082d, #862033);
 
     font-family: 'Verdana', sans-serif;
     background-color: var(--background-body);
@@ -93,8 +96,24 @@ body {
     word-break: break-all;
 }
 
+.sidebar-toolbox {
+    padding-bottom: 1em;
+    border-bottom: 1px solid var(--border-1);
+}
+
+.sidebar-toolbox h4 {
+    margin-bottom: 0;
+}
+
+.toolbox-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
 .sidebar-file-list {
     padding-left: 0px;
+    margin: 0.5em 0em;
 }
 
 .sidebar-file {
@@ -148,6 +167,95 @@ body {
 
 .breadcrumb-current {
     font-weight: bold;
+}
+
+.inline-toolbox {
+    display: block ruby;
+}
+
+.simple-form {
+    margin: 0em 1em;
+    margin-bottom: 2em;
+}
+
+.simple-form label {
+    margin-bottom: 0.35em;
+    display: block;
+    font-weight: bold;
+}
+
+.simple-form .form-group {
+    margin: 1em 0em;
+    border-bottom: var(--border-1) 1px solid;
+    padding-bottom: 1em;
+}
+
+.simple-form .form-buttons {
+    display: flex;
+    justify-content: end;
+}
+
+.form-buttons button {
+    margin-left: 1em;
+}
+
+.textarea-prose {
+    width: -webkit-fill-available;
+    height: 35em;
+    resize: vertical;
+    font-family: unset;
+    font-size: inherit;
+}
+
+.notice {
+    border: 1px solid;
+    padding: 0.5em;
+    border-left: 0.5em solid;
+    border-image: var(--gradient-primary) 1;
+    margin-bottom: 1em;
+}
+
+.notice-warning {
+    border-image: var(--gradient-warning) 1;
+}
+
+.notice-danger {
+    border-image: var(--gradient-danger) 1;
+}
+
+button {
+    color: var(--text-main);
+    background-color: var(--background-1);
+    border: none;
+    padding: 0.4em 0.6em;
+    border-radius: 0.15em;
+    cursor: pointer;
+    box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.19), inset 0 -1px 0px rgba(0, 0, 0, 0.42), 0 1px 2px rgba(0, 0, 0, 0.4);
+    font-size: inherit;
+}
+
+.button-primary {
+    color: #fff;
+    background: var(--gradient-primary);
+    box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.39), inset 0 -1px 0px rgba(0, 0, 0, 0.39), 0 1px 2px rgba(0, 0, 0, 0.4);
+    text-shadow: #4f4f4f 0px 1px;
+}
+
+.button-danger {
+    color: #fff;
+    background: var(--gradient-danger);
+    box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.46), inset 0 -1px 0px rgba(0, 0, 0, 0.59), 0 1px 2px rgba(0, 0, 0, 0.4);
+    text-shadow: #4f4f4f 0px 1px;
+}
+
+.linkbutton {
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.button-compact {
+    padding: 0.2em 0.4em;
+    font-size: 10pt;
 }
 
 blockquote {

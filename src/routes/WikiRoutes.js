@@ -6,7 +6,7 @@ module.exports.ViewWikiPageRoute = new RouteLeaf(
     {
         "GET": (data, { lavender, storage, sanitizer }) => {
             let { file, ancestry } = storage.dig(data.args.path)
-            if (!file) {
+            if (!file) { // TODO: proper error page
                 data.status = 404
                 return data
             }
@@ -41,6 +41,7 @@ module.exports.ViewWikiPageRoute = new RouteLeaf(
                         ancestry: ancestry,
                         currentDir: currentDir,
                         currentWiki: data.args.wiki,
+                        currentFile: file,
                         isFile: !isDirectory
                     })
 
@@ -48,4 +49,58 @@ module.exports.ViewWikiPageRoute = new RouteLeaf(
             return data
         }
     },
+)
+
+module.exports.EditWikiPageRoute = new RouteLeaf(
+    "/:wiki/edit/+path",
+    {
+        "GET": (data, { lavender, storage }) => {
+            let dug = storage.dig(data.args.path)
+            let cwd = dug.file
+            let ancestry = dug.ancestry
+
+            if (!cwd) { // TODO: proper error page
+                data.status = 404
+                return data
+            }
+
+            // TODO: abstract this away in waiter
+            let searchParams = new URL(`http://${data.request.headers["host"]}/${data.request.url}`).searchParams
+
+            let fileName = searchParams.get("name") || ""
+
+            let existingFile = fileName ? cwd.tryGetChild(fileName) : null
+            let existingContent = existingFile?.read().content || ""
+
+            let rendered = lavender
+                .layout("BaseLayout")
+                .render("EditWikiPage",
+                    {
+                        currentDir: cwd,
+                        ancestry: ancestry,
+                        currentWiki: data.args.wiki,
+                        fileName: fileName,
+                        content: existingContent
+                    })
+
+            data.body = rendered.html
+            return data
+        },
+        "POST": async (data, { storage }) => {
+            let form = await data.formData()
+
+            let { filename, content } = form.fields
+            if (!filename && !content) { // TODO: proper error page
+                data.status = 400
+                return data
+            }
+
+            let newFile = storage.upsert(data.args.path, filename.body.toString('utf8'), content.body)
+
+            data.status = 302
+            data.setHead("Location", `/${data.args.wiki}/w/${newFile.pathStripped}`)
+
+            return data
+        }
+    }
 )
