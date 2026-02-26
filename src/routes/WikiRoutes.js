@@ -76,3 +76,29 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
         }
     }
 )
+
+module.exports.RawFileRoute = new RouteLeaf(
+    "/:wiki/raw/+path",
+    {
+        "GET": (data, { storage }) => {
+            let { file } = storage.dig(data.args.path)
+
+            if (!file) {
+                data.status = 404
+                return data
+            }
+
+            if (file.isDirectory) {
+                data.status = 400
+                return data
+            }
+
+            let isDownload = data.searchParams.get("dl")
+            if (isDownload == "1") data.setHead("Content-Disposition", "attachment")
+
+            data.contentType = file.type || "application/octet-stream"
+            data.body = file.read().content
+            return data
+        }
+    }
+)

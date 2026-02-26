@@ -6,6 +6,8 @@
         <h4 class="alt-font">Tools</h4>
         <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}"
             class="button-primary button-compact linkbutton">edit</a>
+        <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}?dl=1"
+            class="button-primary button-compact linkbutton">download</a>
     </div>
     {end}
     {if self.fileType.directory}
