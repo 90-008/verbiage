@@ -6,9 +6,12 @@
     <hr>
     <h2>Files</h2>
     <ul>
-        {for @currentDir.itemsArray item}
-        <li><a href="/{put @currentWiki}/w/{put item.pathStripped}">{put item.name}</a>
-            {if item.isDirectory}(dir){end}</li>
+        {for @currentDir.itemsPresentable item}
+        <li>
+            <a href="/{put @currentWiki}/w/{put item.pathStripped}">
+                {if item.isDirectory}📁{else}📝{end} {put item.name}
+            </a>
+        </li>
         {end}
     </ul>
     {end}
@@ -17,7 +20,7 @@
     <div class="side-panel-inner">
         <h4 class="alt-font">Files</h4>
         <ul class="sidebar-file-list">
-            {for @currentDir.itemsArray item}
+            {for @currentDir.itemsPresentable item}
             <li class="sidebar-file">
                 <a href="/{put @currentWiki}/w/{put item.pathStripped}">
                     {if item.isDirectory}📁{else}📝{end} {put item.name}
