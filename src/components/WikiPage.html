@@ -1,8 +1,8 @@
 <div class="page">
     {if @isFile}
-    <article>{echo @markdown}</article>
+    <article class="markdown">{echo @markdown}</article>
     {else}
-    <article>{echo @markdown}</article>
+    <article class="markdown">{echo @markdown}</article>
     <hr>
     <h2>Files</h2>
     <ul>
@@ -16,11 +16,12 @@
 <div class="side-panel">
     <div class="side-panel-inner">
         <h4 class="alt-font">Files</h4>
-        <ul>
+        <ul class="sidebar-file-list">
             {for @currentDir.itemsArray item}
-            <li>
-                {if item.isDirectory}📁{else}📝{end}
-                <a href="/{put @currentWiki}/w/{put item.pathStripped}">{put item.name}</a>
+            <li class="sidebar-file">
+                <a href="/{put @currentWiki}/w/{put item.pathStripped}">
+                    {if item.isDirectory}📁{else}📝{end} {put item.name}
+                </a>
             </li>
             {end}
         </ul>

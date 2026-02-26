@@ -1,6 +1,17 @@
 body {
+    --text-main: #313131;
+    --background-body: #f9fdff;
+    --background-0: #fff;
+    --background-1: #f2f2f2;
+    --background-shadow: #d9d9d9;
+    --border-0: #ccc;
+    --border-1: #c3c3c3;
+    --border-2: #7b7b7b;
+    --accent: #3367e1;
+    --accent-alt: #861cf0;
+
     font-family: 'Verdana', sans-serif;
-    background-color: #f9fdff;
+    background-color: var(--background-body);
     margin: 0;
 }
 
@@ -27,7 +38,7 @@ body {
     .side-panel {
         width: 100% !important;
         border-left: none !important;
-        border-top: 1px solid #c3c3c3;
+        border-top: 1px solid var(--border-1);
         min-height: 20em;
     }
 }
@@ -53,46 +64,69 @@ body {
 
 .content {
     box-shadow: 2px 5px 7px #0000002e;
-    background-color: #fff;
+    background-color: var(--background-0);
 }
 
 .content-body {
     display: flex;
     min-height: 45em;
     font-size: 11pt;
-    color: #313131;
+    color: var(--text-main);
 }
 
 .page {
     width: 100%;
     padding: 0 0.45em;
+    word-break: break-word;
 }
 
 .side-panel {
-    background-color: #f2f2f2;
-    width: 25em;
-    border-left: 1px solid #c3c3c3;
+    background-color: var(--background-1);
+    width: 22em;
+    border-left: 1px solid var(--border-1);
 }
 
 .side-panel-inner {
     padding: 0 0.25em;
+    word-break: break-all;
+}
+
+.sidebar-file-list {
+    padding-left: 0px;
+}
+
+.sidebar-file {
+    margin-bottom: 0.45em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+}
+
+.sidebar-file a {
+    color: var(--accent) !important;
+    text-decoration: none;
+}
+
+.markdown a {
+    color: var(--accent);
 }
 
 .breadcrumbs-holder {
-    height: 2.5em;
-    padding: 0 0.45em;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    min-height: 2.5em;
+    padding: 0 0.45em;
     align-items: center;
-    border-bottom: 1px solid #7b7b7b;
-    border-top: 1px solid #ccc;
-    background: linear-gradient(180deg, #fdfdfd 90%, rgb(217, 217, 217) 100%)
+    border-bottom: 1px solid var(--border-2);
+    border-top: 1px solid var(--border-0);
+    background: linear-gradient(180deg, var(--background-0) 90%, var(--background-shadow) 100%);
 }
 
 .breadcrumb {
     margin: 0.4em;
     text-decoration: none;
-    color: #4574e3;
+    color: var(--accent) !important;
 }
 
 .breadcrumb:not(.breadcrumb-current)::after {
@@ -103,7 +137,7 @@ body {
     margin-left: 0.55em;
     pointer-events: none;
     font-size: 1.3em;
-    color: #313131;
+    color: var(--text-main);
     font-weight: initial;
     display: inline-block;
     height: 0px;
@@ -116,4 +150,12 @@ body {
 
 blockquote {
     border-left: 3px solid black;
+}
+
+a {
+    color: var(--accent);
+}
+
+a:visited {
+    color: var(--accent-alt);
 }
