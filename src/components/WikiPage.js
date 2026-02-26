@@ -1,4 +1,5 @@
 const { Markdawn } = require("../../lib/markdawn/Markdawn")
+const { FileListPresenter } = require("../presenters/FileListPresenter")
 
 module.exports.hydrate = ({
     sanitizer,
@@ -25,8 +26,11 @@ module.exports.hydrate = ({
     let mdSanitized = sanitizer.sanitize(md)
     let ren = new Markdawn({ escaperFunction: sanitizer.escape }).render(mdSanitized)
 
+    let presented = new FileListPresenter(currentDir).items()
+
     return {
         markdown: ren,
+        fileList: presented,
         fileType: {
             document: !isDirectory,
             directory: isDirectory

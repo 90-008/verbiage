@@ -15,10 +15,10 @@
     <hr>
     <h2>Files</h2>
     <ul>
-        {for @currentDir.itemsPresentable item}
+        {for self.fileList item}
         <li>
-            <a href="/{put @currentWiki}/w/{echo item.pathStripped}">
-                {if item.isDirectory}📁{else}📝{end} {put item.name}
+            <a href="/{put @currentWiki}/w/{echo item.file.pathStripped}">
+                {echo item.icon} {put item.file.name}
             </a>
         </li>
         {end}
@@ -34,10 +34,10 @@
                     class="button-primary button-compact linkbutton">new</a>
             </div>
             <ul class="sidebar-file-list">
-                {for @currentDir.itemsPresentable item}
+                {for self.fileList item}
                 <li class="sidebar-file">
-                    <a href="/{put @currentWiki}/w/{echo item.pathStripped}">
-                        {if item.isDirectory}📁{else}📝{end} {put item.name}
+                    <a href="/{put @currentWiki}/w/{echo item.file.pathStripped}">
+                        {echo item.icon} {put item.file.name}
                     </a>
                 </li>
                 {end}

@@ -21,7 +21,7 @@ class App {
 
         this.assets = {}
 
-        this.storage = new StorageManager(join(__dirname, '../data'), {
+        this.storage = new StorageManager("C:\\", {
             mimeFunction: Mime.fromFileName
         })
 

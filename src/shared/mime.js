@@ -69,7 +69,7 @@ class Mime {
         let nameSplit = name.split(".")
         if (nameSplit.length == 1) return "application/octet-stream"
 
-        return Mime.fromExt(nameSplit[nameSplit.length - 1])
+        return Mime.fromExt(nameSplit[nameSplit.length - 1].toLowerCase())
     }
 }
 
