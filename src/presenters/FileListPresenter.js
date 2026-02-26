@@ -33,7 +33,7 @@ class FileListPresenter {
             ...fileNames.map(i => this.presentFile(this.directory.items[i]))
         ]
 
-        presented = presented.slice(cursor, limit > -1 ? cursor + limit : presented.length - 1)
+        presented = presented.slice(cursor, limit > -1 ? cursor + limit : presented.length)
 
         return presented
     }
