@@ -6,10 +6,10 @@ module.exports.hydrate = ({
 }) => {
     let existingFile = fileName ? currentDir.tryGetChild(fileName) : null
     let existingContent
-    if (!existingFile.isDirectory) existingContent = existingFile?.read().content || ""
+    if (existingFile && !existingFile.isDirectory) existingContent = existingFile?.read().content || ""
 
     return {
-        content: existingContent,
+        content: existingContent || "",
         editMode: action == "edit",
         upsertMode: action == "edit",
         deleteMode: action == "delete",
