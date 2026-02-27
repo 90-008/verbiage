@@ -40,6 +40,30 @@ class App {
         return this
     }
 
+    reportBadRequest(appRequest, code = "BAD_REQUEST", message = "Bad Request", lavender = null) {
+        appRequest.status = 400
+
+        if (appRequest.contentType.startsWith("text/html") && lavender) {
+            let rendered = lavender
+                .layout("BaseLayout")
+                .render("BadRequestPage", {
+                    code: code,
+                    message: message
+                })
+
+            appRequest.body = rendered.html
+        } else {
+            appRequest.contentType = "application/json; charset=utf-8"
+
+            appRequest.body = JSON.stringify({
+                code: code,
+                message: message
+            })
+        }
+
+        return appRequest
+    }
+
     /* 
         Attaches a middleware to the root node of the RouteTree.
         This essentially means the middleware will be found on every search,

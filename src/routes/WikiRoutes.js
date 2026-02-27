@@ -39,7 +39,7 @@ module.exports.ViewWikiPageRoute = new RouteLeaf(
 module.exports.EditWikiPageRoute = new RouteLeaf(
     "/:wiki/edit/+path",
     {
-        "GET": (data, { lavender, storage }) => {
+        "GET": (data, { lavender, storage, reportBadRequest }) => {
             let dug = storage.dig(data.args.path)
             let cwd = dug.file
             let ancestry = dug.ancestry
@@ -86,7 +86,7 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
             data.body = rendered.html
             return data
         },
-        "POST": async (data, { storage }) => {
+        "POST": async (data, { storage, reportBadRequest }) => {
             let form = await data.formData()
 
             let action = data.searchParams.get("action") || "edit"
@@ -96,15 +96,9 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     let fileName = data.searchParams.get("name")
                     let file = storage.dig(data.args.path).file
 
-                    if (!file || !file.tryGetChild(fileName)) { // TODO: proper error page
-                        data.status = 400
-                        return data
-                    }
+                    if (!file || !file.tryGetChild(fileName)) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
 
-                    if (!canDelete(file.tryGetChild(fileName))) { // TODO: proper error page
-                        data.status = 400
-                        return data
-                    }
+                    if (!canDelete(file.tryGetChild(fileName))) return reportBadRequest(data, "NO_PERMISSION", "You do not have permission to perform this action")
 
                     storage.delete(data.args.path, fileName)
 
@@ -112,13 +106,10 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     data.setHead("Location", `/${data.args.wiki}/w/${data.args.path}`)
                     break
                 default:
-                    if (!form) { data.status = 400; return data }
+                    if (!form) return reportBadRequest(data, "BAD_FORM_DATA", "Missing or malformed form data")
 
                     let { filename, content } = form.fields
-                    if (!filename || !content) { // TODO: proper error page
-                        data.status = 400
-                        return data
-                    }
+                    if (!filename || !content) return reportBadRequest(data, "MISSING_FORM_FIELD", "Missing file name or content")
 
                     let newFileName = filename.body.toString('utf8')
                     if (!newFileName.endsWith(".md") && !newFileName.endsWith(".txt")) newFileName += ".txt"
@@ -138,18 +129,15 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
 module.exports.RawFileRoute = new RouteLeaf(
     "/:wiki/raw/+path",
     {
-        "GET": (data, { storage }) => {
+        "GET": (data, { storage, reportBadRequest }) => {
             let { file } = storage.dig(data.args.path)
 
-            if (!file) {
+            if (!file) { // TODO: proper error page
                 data.status = 404
                 return data
             }
 
-            if (file.isDirectory) {
-                data.status = 400
-                return data
-            }
+            if (file.isDirectory) return reportBadRequest(data, "BAD_FILE_ACTION", "Cannot perform raw get on a directory", lavender)
 
             let isDownload = data.searchParams.get("dl")
             if (isDownload == "1") data.setHead("Content-Disposition", "attachment")
