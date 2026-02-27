@@ -120,7 +120,10 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                         return data
                     }
 
-                    let newFile = storage.upsert(data.args.path, filename.body.toString('utf8'), content.body)
+                    let newFileName = filename.body.toString('utf8')
+                    if (!newFileName.endsWith(".md") && !newFileName.endsWith(".txt")) newFileName += ".txt"
+
+                    let newFile = storage.upsert(data.args.path, newFileName, content.body)
 
                     data.status = 302
                     data.setHead("Location", `/${data.args.wiki}/w/${newFile.pathStripped}`)
