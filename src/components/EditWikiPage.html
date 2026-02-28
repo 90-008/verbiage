@@ -9,7 +9,7 @@
     {if self.hasPermission}
     {if self.upsertMode}
     <form class="simple-form" method="post" enctype="multipart/form-data">
-        {if @content}
+        {if self.content}
         <div class="notice">You are editing an existing file. Changes will overwrite this file if submitted. If you
             change the file name field, a new file will be created.</div>
         {end}
