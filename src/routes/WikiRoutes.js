@@ -111,8 +111,12 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     let { filename, content } = form.fields
                     if (!filename || !content) return reportBadRequest(data, "MISSING_FORM_FIELD", "Missing file name or content")
 
+                    let cwd = storage.dig(data.args.path).file
+                    if (!cwd) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
+
                     let newFileName = filename.body.toString('utf8')
-                    if (!newFileName.endsWith(".md") && !newFileName.endsWith(".txt")) newFileName += ".txt"
+                    let existingFile = cwd.tryGetChild(newFileName)
+                    if (!existingFile && (!newFileName.endsWith(".md") && !newFileName.endsWith(".txt"))) newFileName += ".md"
 
                     let newFile = storage.upsert(data.args.path, newFileName, content.body)
 
