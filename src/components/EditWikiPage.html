@@ -9,6 +9,7 @@
     {if self.hasPermission}
     {if self.upsertMode}
     <form class="simple-form" method="post" enctype="multipart/form-data">
+        {if self.editable}
         {if self.content}
         <div class="notice">You are editing an existing file. Changes will overwrite this file if submitted. If you
             change the file name field, a new file will be created.</div>
@@ -22,6 +23,12 @@
         <div class="form-buttons">
             <button class="button-primary">Submit</button>
         </div>
+        {else}
+        <p>Cannot edit a binary file in the text editor.</p>
+        <div class="form-buttons">
+            <a href="/{put @currentWiki}/w/{put @currentDir.pathNormalized}">Go back</a>
+        </div>
+        {end}
     </form>
     {end}
     {if self.deleteMode}
