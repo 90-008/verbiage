@@ -1,11 +1,43 @@
 <div class="page">
     {if self.fileType.document}
+    {if self.fileType.printable}
     <article class="markdown">{echo self.markdown.content}</article>
+    {end}
+    {if self.fileType.image}
+    <div class="preview-box">
+        <a class="preview-item" href="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}">
+            <img src="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}">
+        </a>
+    </div>
+    {end}
+    {if self.fileType.video}
+    <div class="preview-box">
+        <video class="preview-item" src="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}" controls></video>
+        <a class="preview-item" href="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}">View raw file</a>
+    </div>
+    {end}
+    {if self.fileType.audio}
+    <div class="preview-box">
+        <audio class="preview-item" src="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}" controls></audio>
+        <a class="preview-item" href="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}">View raw file</a>
+    </div>
+    {end}
+    {if self.generic}
+    <div class="preview-box">
+        <p>
+            This file type cannot be previewed.
+            <a class="preview-item" href="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}">Click here</a>
+            to view the raw file.
+        </p>
+    </div>
+    {end}
     <hr>
     <div class="inline-toolbox">
         <h4 class="alt-font">Tools</h4>
+        {if self.fileType.printable}
         <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}"
             class="button-primary button-compact linkbutton">edit</a>
+        {end}
         <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}?dl=1"
             class="button-primary button-compact linkbutton">download</a>
         <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}&action=delete"

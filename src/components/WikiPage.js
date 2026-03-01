@@ -39,14 +39,21 @@ module.exports.hydrate = ({
 
     }
 
+    let fileType = {
+        document: !isDirectory,
+        directory: isDirectory,
+        media: isMediaFile,
+        printable: !isMediaFile,
+        image: isMediaFile && contentType.startsWith("image/"),
+        audio: isMediaFile && contentType.startsWith("audio/"),
+        video: isMediaFile && contentType.startsWith("video/")
+    }
+
 
     return {
         markdown: markdown || {},
         fileList: presented,
-        fileType: {
-            document: !isDirectory,
-            directory: isDirectory,
-            media: isMediaFile
-        }
+        fileType: fileType,
+        generic: !(fileType.printable || fileType.image || fileType.audio || fileType.video)
     }
 }

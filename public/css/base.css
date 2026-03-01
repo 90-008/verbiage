@@ -132,6 +132,21 @@ body {
     color: var(--accent);
 }
 
+.preview-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2em 0em;
+}
+
+.preview-item {
+    max-width: 85%;
+}
+
+.preview-item img {
+    max-width: 100%;
+}
+
 .breadcrumbs-holder {
     display: flex;
     flex-direction: row;
@@ -148,6 +163,7 @@ body {
     margin: 0.4em;
     text-decoration: none;
     color: var(--accent) !important;
+    word-break: break-all;
 }
 
 .breadcrumb:not(.breadcrumb-current)::after {
