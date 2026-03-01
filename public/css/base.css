@@ -129,10 +129,6 @@ body {
     text-decoration: none;
 }
 
-.markdown a {
-    color: var(--accent);
-}
-
 .preview-box {
     display: flex;
     flex-direction: column;
@@ -274,6 +270,16 @@ button {
 .button-compact {
     padding: 0.2em 0.4em;
     font-size: 10pt;
+}
+
+.markdown a {
+    color: var(--accent);
+}
+
+.markdown hr {
+    margin: 2.5em 1em;
+    border: none;
+    border-bottom: 1px solid var(--border-2);
 }
 
 blockquote {
