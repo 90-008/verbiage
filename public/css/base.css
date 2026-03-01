@@ -1,5 +1,6 @@
 body {
     --text-main: #313131;
+    --text-code: #c60757;
     --background-body: #f9fdff;
     --background-0: #fff;
     --background-1: #f2f2f2;
@@ -276,7 +277,23 @@ button {
 }
 
 blockquote {
-    border-left: 3px solid black;
+    border-left: 2px solid var(--border-2);
+    padding-left: 0.5em;
+    margin: 1em 1.5em;
+}
+
+samp {
+    border: 1px solid var(--border-0);
+    display: block;
+    padding: 0.5em;
+    background-color: var(--background-1);
+    color: var(--text-code);
+}
+
+code {
+    background-color: var(--background-1);
+    padding: 0.1em;
+    color: var(--text-code);
 }
 
 a {
