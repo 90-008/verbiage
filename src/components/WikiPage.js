@@ -12,7 +12,7 @@ module.exports.hydrate = ({
     let presented = new FileListPresenter(currentDir).items()
 
     let contentType = currentFile.mimeType
-    let isMediaFile = isDirectory == false && !contentType.startsWith("text/")
+    let isMediaFile = isDirectory == false && currentFile.isMediaFile
 
     let markdown
 
@@ -35,8 +35,6 @@ module.exports.hydrate = ({
 
         let textSanitized = sanitizer.sanitize(document)
         markdown = contentType == "text/markdown" || isDirectory ? dawn.render(textSanitized) : dawn.renderPlainText(textSanitized)
-    } else {
-
     }
 
     let fileType = {
@@ -48,7 +46,6 @@ module.exports.hydrate = ({
         audio: isMediaFile && contentType.startsWith("audio/"),
         video: isMediaFile && contentType.startsWith("video/")
     }
-
 
     return {
         markdown: markdown || {},

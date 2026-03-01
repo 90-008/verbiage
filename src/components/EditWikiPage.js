@@ -5,7 +5,7 @@ module.exports.hydrate = ({
     hasPermission
 }) => {
     let existingFile = fileName ? currentDir.tryGetChild(fileName) : null
-    let isEditable = existingFile && existingFile.mimeType.startsWith("text/")
+    let isEditable = existingFile && !existingFile.isMediaFile
     let existingContent
     if (
         existingFile
