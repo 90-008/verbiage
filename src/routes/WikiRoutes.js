@@ -146,7 +146,7 @@ module.exports.RawFileRoute = new RouteLeaf(
             let isDownload = data.searchParams.get("dl")
             if (isDownload == "1") data.setHead("Content-Disposition", "attachment")
 
-            data.contentType = file.mimeType || "application/octet-stream"
+            data.contentType = file.mimeType + "; charset=utf-8" || "application/octet-stream"
             data.body = file.read().content
             return data
         }
