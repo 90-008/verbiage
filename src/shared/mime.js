@@ -11,6 +11,7 @@ class Mime {
         "csv": "text/csv",
         "doc": "application/msword",
         "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "flac": "audio/flac",
         "gz": "application/gzip",
         "gif": "image/gif",
         "html": "text/html",
@@ -23,6 +24,7 @@ class Mime {
         "mid": "audio/midi",
         "midi": "audio/midi",
         "mjs": "text/javascript",
+        "mkv": "video/matroska",
         "mp3": "audio/mp3",
         "mp4": "video/mp4",
         "mpeg": "video/mpeg",
@@ -44,6 +46,7 @@ class Mime {
         "tar": "application/x-tar",
         "tif": "image/tiff",
         "tiff": "image/tiff",
+        "toml": "application/toml",
         "ts": "video/mp2t",
         "ttf": "font/ttf",
         "txt": "text/plain",
@@ -56,6 +59,8 @@ class Mime {
         "xls": "application/vnd.ms-excel",
         "xlsx": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "xml": "application/xml",
+        "yaml": "application/yaml",
+        "yml": "application/yaml",
         "zip": "application/zip",
         "7z": "application/x-7z-compressed"
     }

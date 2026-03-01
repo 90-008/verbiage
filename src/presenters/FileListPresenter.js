@@ -2,7 +2,8 @@ const FileIconAssociations = [
     ["text/", "📝"],
     ["video/", "📺"],
     ["image/", "📷"],
-    ["audio/", "🎶"]
+    ["audio/", "🎶"],
+    ["application/json", "🧾"]
 ]
 
 class FileListPresenter {
