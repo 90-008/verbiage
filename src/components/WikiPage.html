@@ -40,6 +40,8 @@
         {end}
         <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}?dl=1"
             class="button-primary button-compact linkbutton">download</a>
+        <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}"
+            class="button-primary button-compact linkbutton">raw</a>
         <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}&action=delete"
             class="button-danger button-compact linkbutton">delete</a>
     </div>
