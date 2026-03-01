@@ -34,7 +34,7 @@ module.exports.hydrate = ({
         let dawn = new Markdawn({ escaperFunction: sanitizer.escape })
 
         let textSanitized = sanitizer.sanitize(document)
-        markdown = contentType == "text/markdown" ? dawn.render(textSanitized) : dawn.renderPlainText(textSanitized)
+        markdown = contentType == "text/markdown" || isDirectory ? dawn.render(textSanitized) : dawn.renderPlainText(textSanitized)
     } else {
 
     }
