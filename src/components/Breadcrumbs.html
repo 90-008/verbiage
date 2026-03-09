@@ -1,5 +1,5 @@
 <div class="breadcrumbs-holder alt-font">
-    {for self.crumbs crumb}
+    {for crumbs crumb}
     <a href="/{put @currentWiki}/w/{put crumb.file.pathStripped}"
         class="breadcrumb{if crumb.isCurrent} breadcrumb-current{end}">
         {if crumb.file.isDirectory}📁{else}📝{end} {put crumb.file.name}

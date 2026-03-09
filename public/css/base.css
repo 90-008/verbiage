@@ -272,6 +272,33 @@ button {
     font-size: 10pt;
 }
 
+.tab-list {
+    display: flex;
+    padding: 0;
+}
+
+.tab-list-track {
+    border-bottom: 1px solid var(--border-1);
+}
+
+.tab-list-tab {
+    display: block;
+    padding: 0.4em 0.45em;
+}
+
+.tab-current {
+    border-bottom: 0.15em solid var(--accent);
+}
+
+.tab-list-tab a {
+    text-decoration: none;
+    color: var(--text-main) !important;
+}
+
+.tab-current a {
+    color: var(--accent) !important;
+}
+
 .markdown a {
     color: var(--accent);
 }

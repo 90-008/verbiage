@@ -1,16 +1,17 @@
 <div class="page">
-    {if self.editMode}
+    {render TabList actionTabs}
+    {if editMode}
     <h2 class="alt-font">Edit File</h2>
     {end}
-    {if self.deleteMode}
+    {if deleteMode}
     <h2 class="alt-font">Confirm Deletion</h2>
     {end}
     <hr>
-    {if self.hasPermission}
-    {if self.upsertMode}
+    {if hasPermission}
+    {if upsertMode}
     <form class="simple-form" method="post" enctype="multipart/form-data">
-        {if self.editable}
-        {if self.content}
+        {if editable}
+        {if content}
         <div class="notice">You are editing an existing file. Changes will overwrite this file if submitted. If you
             change the file name field, a new file will be created.</div>
         {end}
@@ -18,7 +19,7 @@
         <input name="filename" type="text" placeholder="File name" value="{put @fileName}" required>
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea class="textarea-prose" name="content" placeholder="File content">{put self.content}</textarea>
+            <textarea class="textarea-prose" name="content" placeholder="File content">{put content}</textarea>
         </div>
         <div class="form-buttons">
             <button class="button-primary">Submit</button>
@@ -31,7 +32,7 @@
         {end}
     </form>
     {end}
-    {if self.deleteMode}
+    {if deleteMode}
     <form class="simple-form" method="post">
         <p>Are you sure you want to delete <b>{put @currentDir.pathNormalized}{put @fileName}</b>? This is irreversible.
         </p>

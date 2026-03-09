@@ -30,8 +30,6 @@ While the component data is volatile between scopes, rendering context data stay
 
 Components can add a JavaScript function to enhance the component's rendering with arbitrary data. The JS file must export a function called `hydrate`. This function takes two arguments: the rendering context object - `context`, and the data that was passed into this component - `thisArg`, respectively.
 
-The hydration function must return an object representing the data to apply to this component. This data will be available under the `self` property when accessing it via HTML templates.
-
 Example of a hydration logic file:
 
 ```js
@@ -110,6 +108,8 @@ The for expression takes the input of an iterable symbol and an iterator name, r
 ```
 
 The render expression takes a component name and an optional symbol to pass on to the component being rendered, respectively. The rendered component is pasted into the template.
+
+It also optionally takes a symbol to be passed on to the component - this will be exposed under the `self` property in HTML templates.
 
 # IV. Fallbacks & Error handling
 

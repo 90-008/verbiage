@@ -1,28 +1,28 @@
 <div class="page">
-    {if self.fileType.document}
-    {if self.fileType.printable}
-    <article class="markdown">{echo self.markdown.content}</article>
+    {if fileType.document}
+    {if fileType.printable}
+    <article class="markdown">{echo markdown.content}</article>
     {end}
-    {if self.fileType.image}
+    {if fileType.image}
     <div class="preview-box">
         <a class="preview-item" href="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}">
             <img src="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}">
         </a>
     </div>
     {end}
-    {if self.fileType.video}
+    {if fileType.video}
     <div class="preview-box">
         <video class="preview-item" src="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}" controls></video>
         <a class="preview-item" href="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}">View raw file</a>
     </div>
     {end}
-    {if self.fileType.audio}
+    {if fileType.audio}
     <div class="preview-box">
         <audio class="preview-item" src="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}" controls></audio>
         <a class="preview-item" href="/{put @currentWiki}/raw/{echo @currentFile.pathNormalized}">View raw file</a>
     </div>
     {end}
-    {if self.generic}
+    {if generic}
     <div class="preview-box">
         <p>
             This file type cannot be previewed.
@@ -34,7 +34,7 @@
     <hr>
     <div class="inline-toolbox">
         <h4 class="alt-font">Tools</h4>
-        {if self.fileType.printable}
+        {if fileType.printable}
         <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}"
             class="button-primary button-compact linkbutton">edit</a>
         {end}
@@ -46,8 +46,8 @@
             class="button-danger button-compact linkbutton">delete</a>
     </div>
     {end}
-    {if self.fileType.directory}
-    <article class="markdown">{echo self.markdown.content}</article>
+    {if fileType.directory}
+    <article class="markdown">{echo markdown.content}</article>
     <hr>
     <div class="inline-toolbox">
         <h4 class="alt-font">Tools</h4>
@@ -56,7 +56,7 @@
     </div>
     <h2>Files</h2>
     <ul>
-        {for self.fileList item}
+        {for fileList item}
         <li>
             <a href="/{put @currentWiki}/w/{echo item.file.pathStripped}">
                 {echo item.icon} {put item.file.name}
@@ -75,7 +75,7 @@
                     class="button-primary button-compact linkbutton">new</a>
             </div>
             <ul class="sidebar-file-list">
-                {for self.fileList item}
+                {for fileList item}
                 <li class="sidebar-file">
                     <a href="/{put @currentWiki}/w/{echo item.file.pathStripped}">
                         {echo item.icon} {put item.file.name}

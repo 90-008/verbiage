@@ -1,0 +1,7 @@
+<ul class="tab-list{if self.track} tab-list-track{end}">
+    {for self.tabs tab}
+    <li class="tab-list-tab{if tab.isCurrent} tab-current{end}">
+        <a href="{put tab.href}">{put tab.title}</a>
+    </li>
+    {end}
+</ul>
