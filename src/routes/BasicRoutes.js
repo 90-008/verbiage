@@ -27,6 +27,7 @@ module.exports.StaticAssetRoute = new RouteLeaf(
 
             data.contentType = asset.type
             data.body = await asset.bytes()
+            data.setHead("Cache-Control", `max-age=${60 * 60 * 6}`) // 6 hours
 
             return data
         }
