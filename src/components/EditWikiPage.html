@@ -1,11 +1,6 @@
 <div class="page">
     {render TabList actionTabs}
-    {if editMode}
-    <h2 class="alt-font">Edit File</h2>
-    {end}
-    {if deleteMode}
-    <h2 class="alt-font">Confirm Deletion</h2>
-    {end}
+    <h2 class="alt-font">{echo actionTitle}</h2>
     <hr>
     {if hasPermission}
     {if upsertMode}
@@ -30,6 +25,24 @@
             <a href="/{put @currentWiki}/w/{put @currentDir.pathNormalized}">Go back</a>
         </div>
         {end}
+    </form>
+    {end}
+    {if uploadMode}
+    <form class="simple-form" method="post" enctype="multipart/form-data">
+        <h4>Upload Files</h4>
+        <input name="files" type="file" multiple required>
+        <div class="form-buttons">
+            <button class="button-primary">Submit</button>
+        </div>
+    </form>
+    {end}
+    {if createDirMode}
+    <form class="simple-form" method="post" enctype="multipart/form-data">
+        <b>{put @currentDir.pathNormalized}</b>
+        <input name="filename" type="text" placeholder="Folder name" value="{put @fileName}" required>
+        <div class="form-buttons">
+            <button class="button-primary">Submit</button>
+        </div>
     </form>
     {end}
     {if deleteMode}

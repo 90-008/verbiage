@@ -65,6 +65,14 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     action = "delete"
                     actionCheck = canDelete
                     break
+                case "upload":
+                    action = "upload"
+                    actionCheck = () => { return true }
+                    break
+                case "mkdir":
+                    action = "mkdir"
+                    actionCheck = () => { return true }
+                    break
                 default:
                     action = "edit"
                     actionCheck = () => { return true }
@@ -90,11 +98,13 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
             let form = await data.formData()
 
             let action = data.searchParams.get("action") || "edit"
+            let fileName = data.searchParams.get("name")
+            let file
+            let cwd
 
             switch (action) {
                 case "delete":
-                    let fileName = data.searchParams.get("name")
-                    let file = storage.dig(data.args.path).file
+                    file = storage.dig(data.args.path).file
 
                     if (!file || !file.tryGetChild(fileName)) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
 
@@ -105,13 +115,36 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     data.status = 302
                     data.setHead("Location", `/${data.args.wiki}/w/${data.args.path}`)
                     break
+                case "upload":
+                    cwd = storage.dig(data.args.path).file
+                    if (!cwd) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
+
+                    form.forEach("files", (uploadedFile) => {
+                        cwd.upsert(uploadedFile.filename, uploadedFile.body)
+                    })
+
+                    data.status = 302
+                    data.setHead("Location", `/${data.args.wiki}/w/${data.args.path}`)
+                    break
+                case "mkdir":
+                    cwd = storage.dig(data.args.path).file
+                    if (!cwd) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
+
+                    let dirName = form.get("filename")
+                    if (!dirName) return reportBadRequest(data, "MISSING_FORM_FIELD", "Missing directory name")
+
+                    let newDir = cwd.mkdir(dirName.body.toString('utf8'))
+
+                    data.status = 302
+                    data.setHead("Location", `/${data.args.wiki}/w/${newDir.pathNormalized}`)
+                    break
                 default:
                     if (!form) return reportBadRequest(data, "BAD_FORM_DATA", "Missing or malformed form data")
 
-                    let { filename, content } = form.fields
+                    let { filename, content } = form.getMany("filename", "content")
                     if (!filename || !content) return reportBadRequest(data, "MISSING_FORM_FIELD", "Missing file name or content")
 
-                    let cwd = storage.dig(data.args.path).file
+                    cwd = storage.dig(data.args.path).file
                     if (!cwd) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
 
                     let newFileName = filename.body.toString('utf8')
