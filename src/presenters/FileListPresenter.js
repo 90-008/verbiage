@@ -26,7 +26,7 @@ class FileListPresenter {
             let read = file.read().content.toString('utf8')
 
             let dawn = new Markdawn({})
-            features = dawn.render(read, file.name, false).features
+            features = dawn.render(read, true, file.name).features
         }
 
         return {
