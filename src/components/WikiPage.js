@@ -14,6 +14,7 @@ module.exports.hydrate = ({
     let presented = new FileListPresenter(currentDir).items()
     let presentedDocs
     let presentedDirs
+    let presentedMedia
     if (isDirectory) {
         presentedDocs = new FileListPresenter(currentDir, {
             includeDirs: "no",
@@ -23,6 +24,11 @@ module.exports.hydrate = ({
 
         presentedDirs = new FileListPresenter(currentDir, {
             includeDirs: "only"
+        }).items()
+
+        presentedMedia = new FileListPresenter(currentDir, {
+            includeDirs: "no",
+            includeType: "image/"
         }).items()
         //console.log(presentedDirs)
     }
@@ -71,6 +77,7 @@ module.exports.hydrate = ({
         fileList: presented,
         docList: { list: presentedDocs, wiki: currentWiki },
         dirList: { list: presentedDirs, wiki: currentWiki },
+        mediaList: { list: presentedMedia, wiki: currentWiki },
         fileType: fileType,
         generic: !(fileType.printable || fileType.image || fileType.audio || fileType.video)
     }

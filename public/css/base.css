@@ -19,6 +19,7 @@ body {
     --sidebar-pad: 0.25em;
     --body-width: 64em;
     --document-padding: 0em 0.45em;
+    --media-thumbnail-size: 8em;
 
     font-family: 'Verdana', sans-serif;
     background-color: var(--background-body);
@@ -346,10 +347,6 @@ button {
     padding: var(--document-padding);
 }
 
-.file-box ul {
-    max-width: 48em;
-}
-
 .document-list-item {
     padding-left: 0.5em;
 }
@@ -418,6 +415,57 @@ button {
     font-size: 10pt;
     margin: 0;
     margin-bottom: 1em;
+}
+
+.media-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 0.8em;
+}
+
+.media-list-item {
+    display: flex;
+    width: var(--media-thumbnail-size);
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5em;
+}
+
+.media-list-item a:hover {
+    text-decoration: underline;
+}
+
+.thumb-container {
+    display: flex;
+    place-items: flex-end;
+    height: var(--media-thumbnail-size);
+}
+
+.media-list-thumb {
+    display: block;
+}
+
+.media-list-thumb img {
+    max-width: var(--media-thumbnail-size);
+    max-height: var(--media-thumbnail-size);
+}
+
+.media-list-name {
+    font-size: 10pt;
+    color: var(--accent) !important;
+    text-decoration: none;
+    text-align: center;
+    word-wrap: break-word;
+    max-height: 3.8em;
+    overflow: hidden;
+}
+
+.media-list-info {
+    font-size: 8pt;
+    color: var(--text-muted) !important;
+    text-decoration: none;
+    margin-top: 0.35em;
 }
 
 .markdown {

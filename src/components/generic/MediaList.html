@@ -1,0 +1,20 @@
+{if self.list.length}
+<ul class="media-list">
+    {for self.list img}
+    <li class="media-list-item">
+        <div class="thumb-container">
+            <a class="media-list-thumb" href="/{put self.wiki}/w/{echo img.file.pathNormalized}">
+                <img src="/{put self.wiki}/raw/{echo img.file.pathNormalized}" title="{echo img.file.name}">
+            </a>
+        </div>
+        <a class="media-list-name" href="/{put self.wiki}/w/{echo img.file.pathNormalized}"
+            title="{echo img.file.name}">{put img.file.name}</a>
+        <a class="media-list-info" href="/{put self.wiki}/raw/{echo img.file.pathNormalized}">
+            {put img.file.sizeExtensionString}
+        </a>
+    </li>
+    {end}
+</ul>
+{else}
+<p>No media here yet.</p>
+{end}
