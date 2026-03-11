@@ -26,7 +26,7 @@ class FileListPresenter {
             let read = file.read().content.toString('utf8')
 
             let dawn = new Markdawn({})
-            features = dawn.render(read, true, file.name).features
+            features = (file.mimeType == "text/markdown" ? dawn.render(read, true, file.name) : dawn.renderPlainText(read, file.name)).features
         }
 
         return {
