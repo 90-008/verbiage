@@ -1,8 +1,16 @@
-<div class="page">
+<div id="page" class="page" data-name="{echo @currentFile.name}" data-is-directory="{echo @currentFile.isDirectory}"
+    data-path="{echo @currentFile.pathNormalized}" data-size="{echo @currentFile.size}"
+    data-created-at="{echo @currentFile.createdAt}" data-modified-at="{echo @currentFile.modifiedAt}"
+    data-content-type="{echo @currentFile.mimeType}" data-is-media="{echo fileType.media}"
+    data-is-not-previewable="{echo generic}" data-is-printable="{echo fileType.printable}">
     {if fileType.document}
     <div class="document-header">
         <h2 class="alt-font">{put docTitle}</h2>
-        <p class="file-info">created whenever ago :: modified whenever ago :: {put @currentFile.sizeExtensionString}</p>
+        <p class="file-info">
+            created <span title="{put @currentFile.createdStamp}">{echo @currentFile.createdRelative}</span> ::
+            modified <span title="{put @currentFile.modifiedStamp}">{echo @currentFile.modifiedRelative}</span> ::
+            <span title="{put @currentFile.size}">{put @currentFile.sizeExtensionString}</span>
+        </p>
         <p>{put docDescription}</p>
         <div class="inline-toolbox">
             <h4 class="alt-font">Tools</h4>
@@ -20,7 +28,10 @@
         <hr>
     </div>
     {if fileType.printable}
-    <article class="markdown">{echo markdown.content}</article>
+    <article id="md-document" class="markdown" data-rendered-size="{echo markdown.content.length}"
+        data-title="{put markdown.features.title}">
+        {echo markdown.content}
+    </article>
     {end}
     {if fileType.image}
     <div class="preview-box">
@@ -68,7 +79,10 @@
         </div>
         <hr>
     </div>
-    <article class="markdown">{echo markdown.content}</article>
+    <article id="md-document" class="markdown" data-rendered-size="{echo markdown.content.length}"
+        data-title="{put markdown.features.title}">
+        {echo markdown.content}
+    </article>
     <hr>
     <h2>Files</h2>
     <ul>

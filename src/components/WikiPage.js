@@ -7,6 +7,8 @@ module.exports.hydrate = ({
     currentDir,
     currentWiki
 }) => {
+    currentFile.stat()
+
     let isDirectory = currentFile.isDirectory
 
     let presented = new FileListPresenter(currentDir).items()
