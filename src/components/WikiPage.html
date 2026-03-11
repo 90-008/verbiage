@@ -84,16 +84,10 @@
         {echo markdown.content}
     </article>
     <hr>
-    <h2>Files</h2>
-    <ul>
-        {for fileList item}
-        <li>
-            <a href="/{put @currentWiki}/w/{echo item.file.pathStripped}">
-                {echo item.icon} {put item.file.name}
-            </a>
-        </li>
-        {end}
-    </ul>
+    <div class="file-box">
+        <h2>Documents</h2>
+        {render DocumentList docList}
+    </div>
     {end}
 </div>
 <div class="side-panel">

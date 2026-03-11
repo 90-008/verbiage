@@ -12,6 +12,15 @@ module.exports.hydrate = ({
     let isDirectory = currentFile.isDirectory
 
     let presented = new FileListPresenter(currentDir).items()
+    let presentedDocs
+    if (isDirectory) {
+        presentedDocs = new FileListPresenter(currentDir, {
+            includeDirs: false,
+            includeType: "text/",
+            withMarkdown: true
+        }).items()
+        //console.log(presentedDocs)
+    }
 
     let contentType = currentFile.mimeType
     let isMediaFile = isDirectory == false && currentFile.isMediaFile
@@ -55,6 +64,7 @@ module.exports.hydrate = ({
         docDescription: markdown?.features?.description || "",
         readmeFile: currentFile.isDirectory ? currentFile.tryGetChild("readme.md", false) : null,
         fileList: presented,
+        docList: { list: presentedDocs, wiki: currentWiki },
         fileType: fileType,
         generic: !(fileType.printable || fileType.image || fileType.audio || fileType.video)
     }

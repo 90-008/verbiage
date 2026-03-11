@@ -15,6 +15,7 @@ body {
     --gradient-warning: linear-gradient(to bottom, #ffa700, #df7503);
     --gradient-danger: linear-gradient(to bottom, #cc082d, #862033);
 
+    --body-width: 64em;
     --document-padding: 0em 0.45em;
 
     font-family: 'Verdana', sans-serif;
@@ -22,7 +23,7 @@ body {
     margin: 0;
 }
 
-@media (width < 40em) {
+@media (width < 64em) {
     .site-header {
         font-size: 18pt;
         text-align: center;
@@ -52,7 +53,7 @@ body {
 
 .main {
     margin: auto;
-    max-width: 64em;
+    max-width: var(--body-width);
 }
 
 .alt-font {
@@ -331,6 +332,57 @@ button {
     font-size: 10pt;
     margin-top: 0.25em;
     color: var(--text-muted);
+}
+
+.file-box {
+    padding: var(--document-padding);
+}
+
+.document-list {
+    max-width: 48em;
+}
+
+.document-list-item {
+    padding-left: 0.5em;
+}
+
+.document-list-item::marker {
+    content: "📄";
+}
+
+.document-list-item:hover .document-list-item-excerpt {
+    height: 1.7em;
+    padding-bottom: 1em;
+}
+
+.document-list-item a:hover {
+    text-decoration: underline;
+}
+
+.document-list-item-title {
+    color: var(--accent) !important;
+    text-decoration: none;
+}
+
+.document-list-item-filename {
+    font-size: 10pt;
+    color: var(--text-muted) !important;
+    text-decoration: none;
+}
+
+.document-list-item-description {
+    margin-top: 0.45em;
+}
+
+.document-list-item-excerpt {
+    font-size: 10pt;
+    color: var(--text-muted);
+    margin-top: 0.45em;
+    margin-bottom: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 0em;
+    transition: padding-bottom 0.15s, height 0.15s;
 }
 
 .markdown {
