@@ -10,7 +10,7 @@ const FileIconAssociations = [
 
 class FileListPresenter {
     directory
-    includeDirs = true
+    includeDirs = "yes"
     includeType = null
     withMarkdown = false
 
@@ -32,7 +32,8 @@ class FileListPresenter {
         return {
             file: file,
             icon: file.isDirectory ? "📁" : this.getIcon(file),
-            features: features || null
+            features: features || null,
+            itemCount: file.isDirectory ? Object.keys(file.list().items).length : 0
         }
     }
 
@@ -42,9 +43,10 @@ class FileListPresenter {
         let fileNames = []
         Object.keys(this.directory.items).forEach(k => {
             let entry = this.directory.items[k]
-            if (entry.isDirectory && this.includeDirs) {
+            if (entry.isDirectory && this.includeDirs != "no") {
                 dirNames.push(k)
             } else {
+                if (this.includeDirs == "only") return
                 if (this.includeType && !entry.mimeType.startsWith(this.includeType)) return
                 fileNames.push(k)
             }

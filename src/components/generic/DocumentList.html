@@ -1,5 +1,5 @@
+{if self.list.length}
 <ul class="document-list">
-    {if self.list.length}
     {for self.list doc}
     <li class="document-list-item">
         <div>
@@ -14,7 +14,7 @@
         <p class="document-list-item-excerpt">{put doc.features.excerpt}</p>
     </li>
     {end}
-    {else}
-    <p>No documents here yet.</p>
-    {end}
 </ul>
+{else}
+<p>No documents here yet.</p>
+{end}

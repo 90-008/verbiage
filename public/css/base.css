@@ -15,6 +15,8 @@ body {
     --gradient-warning: linear-gradient(to bottom, #ffa700, #df7503);
     --gradient-danger: linear-gradient(to bottom, #cc082d, #862033);
 
+    --sidebar-width: 18em;
+    --sidebar-pad: 0.25em;
     --body-width: 64em;
     --document-padding: 0em 0.45em;
 
@@ -96,13 +98,15 @@ body {
 
 .side-panel {
     background-color: var(--background-1);
-    width: 22em;
+    width: var(--sidebar-width);
     border-left: 1px solid var(--border-1);
+    flex-shrink: 0;
 }
 
 .side-panel-inner {
-    padding: 0 0.25em;
+    padding: 0 var(--sidebar-pad);
     word-break: break-all;
+    width: calc(var(--sidebar-width) - (var(--sidebar-pad) * 2));
 }
 
 .sidebar-toolbox {
@@ -338,7 +342,7 @@ button {
     padding: var(--document-padding);
 }
 
-.document-list {
+.file-box ul {
     max-width: 48em;
 }
 
@@ -383,6 +387,33 @@ button {
     width: 100%;
     height: 0em;
     transition: padding-bottom 0.15s, height 0.15s;
+}
+
+.folder-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 0.8em;
+}
+
+.folder-list-item {
+    width: 10em;
+    margin-left: 1.8em;
+}
+
+.folder-list-item::marker {
+    content: "📁";
+}
+
+.folder-list-item a {
+    color: var(--accent) !important;
+    text-decoration: none;
+}
+
+.folder-list-item-counter {
+    font-size: 10pt;
+    margin: 0;
+    margin-bottom: 1em;
 }
 
 .markdown {

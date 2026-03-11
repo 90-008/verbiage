@@ -13,13 +13,18 @@ module.exports.hydrate = ({
 
     let presented = new FileListPresenter(currentDir).items()
     let presentedDocs
+    let presentedDirs
     if (isDirectory) {
         presentedDocs = new FileListPresenter(currentDir, {
-            includeDirs: false,
+            includeDirs: "no",
             includeType: "text/",
             withMarkdown: true
         }).items()
-        //console.log(presentedDocs)
+
+        presentedDirs = new FileListPresenter(currentDir, {
+            includeDirs: "only"
+        }).items()
+        //console.log(presentedDirs)
     }
 
     let contentType = currentFile.mimeType
@@ -65,6 +70,7 @@ module.exports.hydrate = ({
         readmeFile: currentFile.isDirectory ? currentFile.tryGetChild("readme.md", false) : null,
         fileList: presented,
         docList: { list: presentedDocs, wiki: currentWiki },
+        dirList: { list: presentedDirs, wiki: currentWiki },
         fileType: fileType,
         generic: !(fileType.printable || fileType.image || fileType.audio || fileType.video)
     }
