@@ -68,7 +68,7 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - - [X] Stat file
 - - - [X] Write file
 - - - [X] Read file
-- - - [ ] Delete file
+- - - [X] Delete file
 - - - [X] isDirectory
 - - - [X] Upsert file
 - - - [ ] Append file
@@ -91,8 +91,8 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - - [ ] Query based on property equality
 - - - [ ] Query based on arbitrary function
 - [ ] **Verbiage**
-- - [ ] CRUD wiki pages
-- - [ ] Arbitrary file upload
+- - [X] CRUD wiki pages
+- - [X] Arbitrary file upload
 - - [ ] File listing view
 - - [ ] Media gallery view
 - - [ ] Search
