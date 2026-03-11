@@ -51,6 +51,10 @@ body {
         border-top: 1px solid var(--border-1);
         min-height: 20em;
     }
+
+    .side-panel-inner {
+        width: unset !important;
+    }
 }
 
 .main {
