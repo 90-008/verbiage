@@ -2,7 +2,7 @@
     {if fileType.document}
     <div class="document-header">
         <h2 class="alt-font">{put docTitle}</h2>
-        <p class="file-info">created whenever ago :: modified whenever ago :: 2KB .md</p>
+        <p class="file-info">created whenever ago :: modified whenever ago :: {put @currentFile.sizeExtensionString}</p>
         <p>{put docDescription}</p>
         <div class="inline-toolbox">
             <h4 class="alt-font">Tools</h4>
