@@ -34,7 +34,7 @@ module.exports.hydrate = ({
         let dawn = new Markdawn({ escaperFunction: sanitizer.escape })
 
         let textSanitized = sanitizer.sanitize(document)
-        markdown = contentType == "text/markdown" || isDirectory ? dawn.render(textSanitized) : dawn.renderPlainText(textSanitized)
+        markdown = contentType == "text/markdown" || isDirectory ? dawn.render(textSanitized, true, currentFile.name) : dawn.renderPlainText(textSanitized, currentFile.name)
     }
 
     let fileType = {
@@ -49,6 +49,9 @@ module.exports.hydrate = ({
 
     return {
         markdown: markdown || {},
+        docTitle: markdown?.features?.title || currentFile.name,
+        docDescription: markdown?.features?.description || "",
+        readmeFile: currentFile.isDirectory ? currentFile.tryGetChild("readme.md", false) : null,
         fileList: presented,
         fileType: fileType,
         generic: !(fileType.printable || fileType.image || fileType.audio || fileType.video)

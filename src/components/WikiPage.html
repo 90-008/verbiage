@@ -1,5 +1,24 @@
 <div class="page">
     {if fileType.document}
+    <div class="document-header">
+        <h2 class="alt-font">{put docTitle}</h2>
+        <p class="file-info">created whenever ago :: modified whenever ago :: 2KB .md</p>
+        <p>{put docDescription}</p>
+        <div class="inline-toolbox">
+            <h4 class="alt-font">Tools</h4>
+            {if fileType.printable}
+            <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}"
+                class="button-primary button-compact linkbutton">edit</a>
+            {end}
+            <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}?dl=1"
+                class="button-primary button-compact linkbutton">download</a>
+            <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}"
+                class="button-primary button-compact linkbutton">raw</a>
+            <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}&action=delete"
+                class="button-danger button-compact linkbutton">delete</a>
+        </div>
+        <hr>
+    </div>
     {if fileType.printable}
     <article class="markdown">{echo markdown.content}</article>
     {end}
@@ -32,28 +51,25 @@
     </div>
     {end}
     <hr>
-    <div class="inline-toolbox">
-        <h4 class="alt-font">Tools</h4>
-        {if fileType.printable}
-        <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}"
-            class="button-primary button-compact linkbutton">edit</a>
-        {end}
-        <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}?dl=1"
-            class="button-primary button-compact linkbutton">download</a>
-        <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}"
-            class="button-primary button-compact linkbutton">raw</a>
-        <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}&action=delete"
-            class="button-danger button-compact linkbutton">delete</a>
-    </div>
     {end}
     {if fileType.directory}
+    <div class="document-header">
+        <h2 class="alt-font">{put docTitle}</h2>
+        <p class="file-info">{put @currentFile.pathNormalized}</p>
+        <p>{put docDescription}</p>
+        <div class="inline-toolbox">
+            <h4 class="alt-font">Tools</h4>
+            {if readmeFile}
+            <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo readmeFile.name}"
+                class="button-primary button-compact linkbutton">edit readme</a>
+            {end}
+            <a href="/{put @currentWiki}/edit/{echo @currentDir.pathAncestor}?name={echo @currentFile.name}&action=delete"
+                class="button-danger button-compact linkbutton">delete</a>
+        </div>
+        <hr>
+    </div>
     <article class="markdown">{echo markdown.content}</article>
     <hr>
-    <div class="inline-toolbox">
-        <h4 class="alt-font">Tools</h4>
-        <a href="/{put @currentWiki}/edit/{echo @currentDir.pathAncestor}?name={echo @currentFile.name}&action=delete"
-            class="button-danger button-compact linkbutton">delete</a>
-    </div>
     <h2>Files</h2>
     <ul>
         {for fileList item}

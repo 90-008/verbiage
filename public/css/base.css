@@ -1,5 +1,6 @@
 body {
     --text-main: #313131;
+    --text-muted: #565656;
     --text-code: #c60757;
     --background-body: #f9fdff;
     --background-0: #fff;
@@ -13,6 +14,8 @@ body {
     --gradient-primary: linear-gradient(to bottom, #0af, #006bdf);
     --gradient-warning: linear-gradient(to bottom, #ffa700, #df7503);
     --gradient-danger: linear-gradient(to bottom, #cc082d, #862033);
+
+    --document-padding: 0em 0.45em;
 
     font-family: 'Verdana', sans-serif;
     background-color: var(--background-body);
@@ -82,8 +85,12 @@ body {
 
 .page {
     width: 100%;
-    padding: 0 0.45em;
+    padding: var(--document-padding);
     word-break: break-word;
+}
+
+.page:has(.document-header) {
+    padding: 0 !important;
 }
 
 .side-panel {
@@ -184,6 +191,10 @@ body {
 
 .inline-toolbox {
     display: block ruby;
+}
+
+.inline-toolbox>h4 {
+    margin: 0.5em 0em;
 }
 
 .simple-form {
@@ -297,6 +308,33 @@ button {
 
 .tab-current a {
     color: var(--accent) !important;
+}
+
+.document-header {
+    padding: var(--document-padding);
+    padding-top: 1em;
+    background-color: var(--background-1);
+    padding-bottom: 1em;
+    background: linear-gradient(180deg, var(--background-1) 97%, var(--background-shadow) 100%);
+}
+
+.document-header hr {
+    display: none;
+}
+
+.document-header h2 {
+    margin: 0;
+}
+
+.document-header .file-info {
+    margin: 0;
+    font-size: 10pt;
+    margin-top: 0.25em;
+    color: var(--text-muted);
+}
+
+.markdown {
+    padding: var(--document-padding);
 }
 
 .markdown a {
