@@ -2,6 +2,7 @@
 <ul class="folder-list">
     {for self.list dir}
     <li class="folder-list-item">
+        <a class="wraplink" href="/{echo self.wiki}/w/{echo dir.file.pathStripped}"></a>
         <a href="/{echo self.wiki}/w/{echo dir.file.pathStripped}">{put dir.file.name}</a>
         <p class="folder-list-item-counter">{echo dir.itemCount} items</p>
     </li>

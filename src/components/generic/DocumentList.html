@@ -2,7 +2,7 @@
 <ul class="document-list">
     {for self.list doc}
     <li class="document-list-item" href="/{echo self.wiki}/w/{echo doc.file.pathStripped}">
-        <a class="document-list-item-wraplink" href="/{echo self.wiki}/w/{echo doc.file.pathStripped}"></a>
+        <a class="wraplink" href="/{echo self.wiki}/w/{echo doc.file.pathStripped}"></a>
         <div>
             <a href="/{echo self.wiki}/w/{echo doc.file.pathStripped}" class="document-list-item-title">
                 {put doc.features.title}

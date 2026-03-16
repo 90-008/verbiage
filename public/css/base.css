@@ -397,6 +397,12 @@ button {
     padding: var(--document-padding);
 }
 
+.wraplink {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
 .document-list-item {
     padding-left: 0.5em;
     position: relative;
@@ -452,12 +458,6 @@ button {
     transition: padding-bottom 0.15s, height 0.15s;
 }
 
-.document-list-item-wraplink {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-}
-
 .folder-list {
     display: flex;
     flex-direction: row;
@@ -468,10 +468,17 @@ button {
 .folder-list-item {
     width: 10em;
     margin-left: 1.8em;
+    position: relative;
 }
 
 .folder-list-item::marker {
     content: "📁";
+}
+
+.folder-list-item *:not(.wraplink) {
+    z-index: 1;
+    position: relative;
+    width: fit-content;
 }
 
 .folder-list-item a {
