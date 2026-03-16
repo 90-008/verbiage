@@ -7,11 +7,23 @@
 
 <body>
     <div class="main">
-        <h1 class="site-header alt-font">Verbiage</h1>
-        <p class="site-subheader alt-font">Subheader</p>
+        <div class="header-container">
+            <div class="header-titles">
+                <h1 class="site-header alt-font">Verbiage</h1>
+                <p class="site-subheader alt-font">Subheader</p>
+                {if wikiTabs}
+                {render TabList wikiTabs}
+                {end}
+            </div>
+        </div>
         <div class="content">
             {if @ancestry}{render Breadcrumbs}{end}
             <div class="content-body">{slot}</div>
         </div>
+        <footer class="site-footer alt-font">
+            <p>Powered by Verbiage</p>
+            <a href="/">home</a><span> :: </span>
+            <a href="/">all wikis</a>
+        </footer>
     </div>
 </body>

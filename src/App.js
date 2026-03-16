@@ -137,7 +137,7 @@ class App {
             let assetPath = basePart + assetExt
             console.log(`app/static > Importing asset ${assetPath}`)
 
-            let assetContent = readFileSync(join(where, assetPath), { encoding: "utf8" })
+            let assetContent = readFileSync(join(where, assetPath))
             this.assets[assetPath] = new Blob([assetContent], { type: Mime.fromExt(assetExt) })
         })
     }
