@@ -1,7 +1,8 @@
 {if self.list.length}
 <ul class="document-list">
     {for self.list doc}
-    <li class="document-list-item">
+    <li class="document-list-item" href="/{echo self.wiki}/w/{echo doc.file.pathStripped}">
+        <a class="document-list-item-wraplink" href="/{echo self.wiki}/w/{echo doc.file.pathStripped}"></a>
         <div>
             <a href="/{echo self.wiki}/w/{echo doc.file.pathStripped}" class="document-list-item-title">
                 {put doc.features.title}
@@ -9,9 +10,9 @@
             <a href="/{echo self.wiki}/w/{echo doc.file.pathStripped}" class="document-list-item-filename">
                 /{put doc.file.name}
             </a>
+            <p class="document-list-item-description">{put doc.features.description}</p>
+            <p class="document-list-item-excerpt">{put doc.features.excerpt}</p>
         </div>
-        <p class="document-list-item-description">{put doc.features.description}</p>
-        <p class="document-list-item-excerpt">{put doc.features.excerpt}</p>
     </li>
     {end}
 </ul>

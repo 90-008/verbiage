@@ -399,6 +399,18 @@ button {
 
 .document-list-item {
     padding-left: 0.5em;
+    position: relative;
+}
+
+.document-list-item div {
+    z-index: 1;
+    position: relative;
+    pointer-events: none;
+}
+
+.document-list-item div *:not(.document-list-item-excerpt) {
+    pointer-events: all;
+    width: fit-content;
 }
 
 .document-list-item::marker {
@@ -438,6 +450,12 @@ button {
     width: 100%;
     height: 0em;
     transition: padding-bottom 0.15s, height 0.15s;
+}
+
+.document-list-item-wraplink {
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }
 
 .folder-list {
