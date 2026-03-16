@@ -147,6 +147,13 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     cwd = storage.dig(data.args.path).file
                     if (!cwd) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
 
+                    /*
+                        Dig in create mode to make directories to allow the new file
+                        to be created without issues, in case the user supplied a
+                        nested path.
+                    */
+                    storage.dig(data.args.path + "/" + filename.body.toString('utf8'), true, true)
+
                     let newFileName = filename.body.toString('utf8')
                     let existingFile = cwd.tryGetChild(newFileName)
                     if (!existingFile && (!newFileName.endsWith(".md") && !newFileName.endsWith(".txt"))) newFileName += ".md"
