@@ -608,3 +608,18 @@ a {
 a:visited {
     color: var(--accent-alt);
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead {
+    background-color: var(--background-1);
+}
+
+th,
+td {
+    padding: 0.3em 0.4em;
+    border: 1px solid var(--border-1);
+}
