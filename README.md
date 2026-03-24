@@ -54,10 +54,11 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [X] Ordered list
 - - [X] Inline code block
 - - [X] Code block
-- - [ ] Table
+- - [X] Table
 - - [ ] Footnote
 - - [X] Links
 - - [X] Masked links
+- - [ ] Embedded image
 - - [ ] Extract facets from markdown (eg. TOC, document title, excerpt...)
 - [ ] **Cabinet**
 - - [X] Cache file tree
