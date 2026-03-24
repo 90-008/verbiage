@@ -3,13 +3,13 @@ body {
     --text-muted: #565656;
     --text-code: #c60757;
     --text-inverted: #fff;
-    --background-body: #fff5e7;
-    --background-0: #fff8ea;
-    --background-1: #fbf2e7;
-    --background-shadow: #dcd4c3;
-    --border-0: #cdc5b6;
-    --border-1: #c5bba3;
-    --border-2: #7d796c;
+    --background-body: #fff9f1;
+    --background-0: #fffaf0;
+    --background-1: #fbf6f0;
+    --background-shadow: #dcd8cd;
+    --border-0: #cdc9c1;
+    --border-1: #c7c2b7;
+    --border-2: #827f78;
     --accent: #3367e1;
     --accent-alt: #861cf0;
     --accent-alt-2: #c60757;
@@ -233,8 +233,6 @@ body {
 .breadcrumb:not(.breadcrumb-current)::after {
     content: "»";
     margin: 0;
-    margin-left: 0px;
-    margin-left: 0px;
     margin-left: 0.55em;
     pointer-events: none;
     font-size: 1.3em;
