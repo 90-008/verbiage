@@ -33,8 +33,7 @@ class FileListPresenter {
         return {
             file: file,
             icon: file.isDirectory ? "📁" : this.getIcon(file),
-            features: features || null,
-            itemCount: file.isDirectory ? Object.keys(file.list().items).length : 0
+            features: features || null
         }
     }
 
