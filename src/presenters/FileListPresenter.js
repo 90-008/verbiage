@@ -41,8 +41,8 @@ class FileListPresenter {
         let presented = []
         let dirNames = []
         let fileNames = []
-        Object.keys(this.directory.items).forEach(k => {
-            let entry = this.directory.items[k]
+        this.directory.items.keys().forEach(k => {
+            let entry = this.directory.items.get(k)
             if (entry.isDirectory && this.includeDirs != "no") {
                 dirNames.push(k)
             } else {
@@ -55,8 +55,8 @@ class FileListPresenter {
         fileNames.sort((a, b) => { a.localeCompare(b) })
 
         presented = [
-            ...dirNames.map(i => this.directory.items[i]),
-            ...fileNames.map(i => this.directory.items[i])
+            ...dirNames.map(i => this.directory.items.get(i)),
+            ...fileNames.map(i => this.directory.items.get(i))
         ]
 
         presented = presented.slice(cursor, limit > -1 ? cursor + limit : presented.length)
