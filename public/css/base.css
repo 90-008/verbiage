@@ -555,6 +555,18 @@ button {
     border-bottom: 1px solid var(--border-2);
 }
 
+.markdown *:has(.header-permalink):hover .header-permalink a {
+    display: inline;
+}
+
+.header-permalink a {
+    display: none;
+    color: var(--accent) !important;
+    margin-left: 0.3em;
+    font-size: 12pt;
+    font-weight: 100;
+}
+
 p,
 h1,
 h2,
