@@ -1,5 +1,6 @@
 const { Markdawn } = require("../../lib/markdawn/Markdawn")
 const { FileListPresenter } = require("../presenters/FileListPresenter")
+const { linkPresenter } = require("../presenters/LinkPresenter")
 
 module.exports.hydrate = ({
     sanitizer,
@@ -53,7 +54,16 @@ module.exports.hydrate = ({
             document = `*This directory has no readme file.* {{${newLink}|Click here to create one}}.`
         }
 
-        let dawn = new Markdawn({ escaperFunction: sanitizer.escape })
+        let dawn = new Markdawn(
+            {
+                escaperFunction: sanitizer.escape,
+                linkFunction: linkPresenter,
+                context: {
+                    currentDir: currentDir,
+                    currentWiki: currentWiki
+                }
+            }
+        )
 
         let textSanitized = sanitizer.sanitize(document)
         markdown = contentType == "text/markdown" || isDirectory ? dawn.render(textSanitized, true, currentFile.name) : dawn.renderPlainText(textSanitized, currentFile.name)
