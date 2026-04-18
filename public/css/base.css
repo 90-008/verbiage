@@ -7,6 +7,7 @@ body {
     --background-0: #fffaf0;
     --background-1: #fbf6f0;
     --background-shadow: #dcd8cd;
+    --background-target: #1d56ff1c;
     --border-0: #cdc9c1;
     --border-1: #c7c2b7;
     --border-2: #827f78;
@@ -557,6 +558,15 @@ button {
 
 .markdown *:has(.header-permalink):hover .header-permalink a {
     display: inline;
+}
+
+.markdown .footnotes {
+    padding-top: 0.5em;
+    border-top: 1px solid var(--border-1);
+}
+
+.footnote:target {
+    background-color: var(--background-target);
 }
 
 .header-permalink a {
