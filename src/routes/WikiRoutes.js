@@ -187,7 +187,15 @@ module.exports.RawFileRoute = new RouteLeaf(
             if (isDownload == "1") data.setHead("Content-Disposition", "attachment")
 
             data.contentType = file.mimeType + "; charset=utf-8" || "application/octet-stream"
-            data.body = file.read().content
+
+            data.writeHead()
+
+            file.readStream((chunk) => {
+                data.write(chunk)
+            })
+                .catch((e) => { console.log(e); data.end() })
+                .then(() => { data.end() })
+
             return data
         }
     }
