@@ -6,6 +6,7 @@ body {
     --background-body: #fff9f1;
     --background-0: #fffaf0;
     --background-1: #fbf6f0;
+    --background-prose: #fffdf9;
     --background-shadow: #dcd8cd;
     --background-target: #1d56ff1c;
     --border-0: #cdc9c1;
@@ -284,7 +285,8 @@ body {
 }
 
 .textarea-prose {
-    width: -webkit-fill-available;
+    width: 100%;
+    box-sizing: border-box;
     height: 35em;
     resize: vertical;
     font-family: unset;
@@ -297,6 +299,7 @@ body {
     border-left: 0.5em solid;
     border-image: var(--gradient-primary) 1;
     margin-bottom: 1em;
+    background-color: var(--background-0);
 }
 
 .notice-warning {
@@ -313,9 +316,17 @@ button {
     border: none;
     padding: 0.4em 0.6em;
     border-radius: 0.15em;
-    cursor: pointer;
     box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.19), inset 0 -1px 0px rgba(0, 0, 0, 0.42), 0 1px 2px rgba(0, 0, 0, 0.4);
     font-size: inherit;
+    transition: filter 0.06s;
+}
+
+button:hover {
+    filter: brightness(1.1) contrast(1.2);
+}
+
+button:active {
+    filter: brightness(0.8) contrast(1.8);
 }
 
 .button-primary {
@@ -632,4 +643,18 @@ th,
 td {
     padding: 0.3em 0.4em;
     border: 1px solid var(--border-1);
+}
+
+textarea {
+    background-color: var(--background-prose);
+    color: var(--text-main);
+    border: 1px solid var(--border-2);
+    padding: 0.4em;
+}
+
+input[type="text"] {
+    background-color: var(--background-prose);
+    color: var(--text-main);
+    padding: 0.25em;
+    border: 1px solid var(--border-2);
 }
