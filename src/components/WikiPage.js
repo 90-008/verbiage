@@ -1,6 +1,6 @@
 const { Markdawn } = require("../../lib/markdawn/Markdawn")
 const { FileListPresenter } = require("../presenters/FileListPresenter")
-const { linkPresenter } = require("../presenters/LinkPresenter")
+const { linkPresenter, mediaLinkPresenter } = require("../presenters/LinkPresenter")
 
 module.exports.hydrate = ({
     sanitizer,
@@ -58,6 +58,7 @@ module.exports.hydrate = ({
             {
                 escaperFunction: sanitizer.escape,
                 linkFunction: linkPresenter,
+                mediaFunction: mediaLinkPresenter,
                 context: {
                     currentDir: currentDir,
                     currentWiki: currentWiki

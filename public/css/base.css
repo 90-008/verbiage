@@ -574,6 +574,11 @@ button:active {
     border-bottom: 1px solid var(--border-2);
 }
 
+.markdown img,
+.markdown video {
+    max-width: 85%;
+}
+
 .markdown *:has(.header-permalink):hover .header-permalink a {
     display: inline;
 }
