@@ -75,7 +75,7 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - - [ ] Append file
 - - - [ ] Move/rename file
 - - - [ ] Test permissions
-- - - [ ] Open read stream
+- - - [X] Open read stream
 - - - [ ] Open write stream
 - - - [X] Check if directory has a child filename (from directory object)
 - - - [X] Stat file (from file object)
