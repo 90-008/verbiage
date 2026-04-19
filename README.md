@@ -55,11 +55,12 @@ Verbiage is an ambitious project. Here's the full run-down on what you can come 
 - - [X] Inline code block
 - - [X] Code block
 - - [X] Table
-- - [ ] Footnote
+- - [X] Footnote
 - - [X] Links
 - - [X] Masked links
-- - [ ] Embedded image
-- - [ ] Extract facets from markdown (eg. TOC, document title, excerpt...)
+- - [X] Embedded image
+- - [X] Extract facets from markdown (eg. TOC, document title, excerpt...)
+- - - [ ] Table of contents
 - [ ] **Cabinet**
 - - [X] Cache file tree
 - - [X] Cache file contents
