@@ -56,7 +56,7 @@ function mediaLinkPresenter(href) {
         let fileType = Mime.fromFileName(location).split("/")[0]
         if (!(["image", "audio", "video"].includes(fileType))) fileType = null
 
-        return { type: fileType, href: href }
+        return { type: fileType, href: href, link: href }
     }
 
     if (hrefPath.startsWith("/")) { // /absolute/path -> /+wiki-name/w/absolute/path.md
@@ -72,7 +72,11 @@ function mediaLinkPresenter(href) {
 
     if (!(["image", "audio", "video"].includes(fileType))) return null
 
-    return { type: fileType, href: `/${currentWiki}/raw/${locationDug.file.pathNormalized}${hrefExtras}` }
+    return {
+        type: fileType,
+        href: `/${currentWiki}/raw/${locationDug.file.pathNormalized}${hrefExtras}`,
+        link: `/${currentWiki}/w/${locationDug.file.pathNormalized}${hrefExtras}`
+    }
 }
 
 module.exports.linkPresenter = linkPresenter

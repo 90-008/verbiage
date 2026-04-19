@@ -24,6 +24,7 @@ body {
     --body-width: 76em;
     --document-padding: 0em 0.45em;
     --media-thumbnail-size: 8em;
+    --gallery-item-size: 22em;
 
     font-family: 'Verdana', sans-serif;
     background-color: var(--background-body);
@@ -577,6 +578,7 @@ button:active {
 .markdown img,
 .markdown video {
     max-width: 85%;
+    height: unset;
 }
 
 .markdown *:has(.header-permalink):hover .header-permalink a {
@@ -586,6 +588,47 @@ button:active {
 .markdown .footnotes {
     padding-top: 0.5em;
     border-top: 1px solid var(--border-1);
+}
+
+.media-gallery {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.media-gallery:has(> :last-child:nth-child(1)) .media-gallery-item {
+    max-width: 85%;
+}
+
+.media-gallery:has(> :last-child:nth-child(1)) .media-gallery-container * {
+    max-height: 38em;
+}
+
+.media-gallery-item {
+    max-width: var(--gallery-item-size);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
+}
+
+.media-gallery-container {
+    display: contents;
+}
+
+.media-gallery-container * {
+    max-height: var(--gallery-item-size);
+}
+
+.media-gallery-caption {
+    font-family: 'Tahoma';
+    font-size: 10pt;
+}
+
+.media-gallery-caption,
+.media-gallery-caption * {
+    color: var(--text-muted);
 }
 
 .footnote:target {
