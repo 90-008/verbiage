@@ -88,7 +88,7 @@ module.exports.NotFoundHandlerRoute = new RouteLeaf(
                         {
                             currentDir: rej.data.currentDir,
                             currentWiki: data.args.wiki,
-                            rejectionMessage: rej.data.message || strings.genericMessage
+                            rejectionMessage: rej.data.message || "Not found"
                         }, false)
 
                 data.body = rendered.html
