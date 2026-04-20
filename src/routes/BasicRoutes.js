@@ -4,10 +4,9 @@ const { ErrorStrings } = require("../shared/ErrorStrings")
 module.exports.HomePageRoute = new RouteLeaf(
     "/",
     {
-        "GET": (req) => {
-            req.setHead("X-Hello", "Hello, World!")
-
-            req.set("Hello, World!")
+        "GET": (req, { wikiName }) => {
+            req.status = 302
+            req.setHead("Location", `/${wikiName}/w/~`)
 
             return req
         }

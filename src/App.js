@@ -1,5 +1,5 @@
 const { readdirSync, readFileSync, statSync, existsSync } = require('node:fs')
-const { join, parse } = require('node:path')
+const { join, parse, basename, resolve } = require('node:path')
 
 const { Mime } = require('./shared/mime.js')
 
@@ -14,6 +14,7 @@ class App {
     assets
     storage
     sanitizer
+    wikiName
 
     constructor() {
         this.server = new Waiter(this)
@@ -21,8 +22,10 @@ class App {
 
         this.assets = {}
 
-        let dataDir = process.env.VERBIAGE_DATA || join(__dirname, '../data')
+        let dataDir = resolve(process.env.VERBIAGE_DATA || join(__dirname, '../data'))
+        this.wikiName = process.env.VERBIAGE_WIKI || basename(dataDir)
         console.log(`app > data: ${dataDir}`)
+        console.log(`app > wiki: ${this.wikiName}`)
 
         this.storage = new StorageManager(dataDir, {
             mimeFunction: Mime.fromFileName
@@ -38,7 +41,7 @@ class App {
 
     start() {
         this.server.listen(3001)
-        console.log('app > listening on http://localhost:3001/')
+        console.log(`app > listening on http://localhost:3001/${this.wikiName}/w/~`)
 
         return this
     }
