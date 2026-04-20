@@ -33,7 +33,8 @@
             runtimeInputs = [ pkgs.nodejs ];
             text = ''
               # First arg (if given) is the data directory; defaults to ./data
-              export VERBIAGE_DATA="$(realpath "''${1:-$(pwd)/data}")"
+              VERBIAGE_DATA="$(realpath "''${1:-$(pwd)/data}")"
+              export VERBIAGE_DATA
               exec node ${src}/index.js
             '';
           };
