@@ -17,7 +17,7 @@
 */
 
 const { join, dirname, resolve } = require('node:path')
-const { mkdirSync, writeFileSync, cpSync, existsSync } = require('node:fs')
+const { mkdirSync, writeFileSync, cpSync, existsSync, rmSync } = require('node:fs')
 
 const { App } = require('./src/App.js')
 
@@ -47,6 +47,7 @@ const { lavender, storage, sanitizer } = app
 
 // -- output dir --
 
+rmSync(OUT_DIR, { recursive: true, force: true })
 mkdirSync(OUT_DIR, { recursive: true })
 
 // -- static assets --
