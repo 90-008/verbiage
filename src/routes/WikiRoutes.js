@@ -181,7 +181,7 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
 module.exports.RawFileRoute = new RouteLeaf(
     "/:wiki/raw/+path",
     {
-        "GET": (data, { storage, lavender, reportBadRequest }) => {
+        "GET": (data, { storage, lavender }) => {
             let { file } = storage.dig(data.args.path)
 
             if (!file) { // TODO: proper error page
