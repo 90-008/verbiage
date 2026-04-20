@@ -6,7 +6,8 @@ module.exports.hydrate = ({
     sanitizer,
     currentFile,
     currentDir,
-    currentWiki
+    currentWiki,
+    writeEnabled
 }) => {
     currentFile.stat()
 
@@ -48,10 +49,14 @@ module.exports.hydrate = ({
         }
 
         if (document == null) {
-            let newLink = currentDir.path == "/"
-                ? `/${currentWiki}/edit/~?name=README.md`
-                : `/${currentWiki}/edit/${currentDir.path}?name=README.md`
-            document = `*This directory has no readme file.* {{${newLink}|Click here to create one}}.`
+            if (writeEnabled) {
+                let newLink = currentDir.path == "/"
+                    ? `/${currentWiki}/edit/~?name=README.md`
+                    : `/${currentWiki}/edit/${currentDir.path}?name=README.md`
+                document = `*This directory has no readme file.* {{${newLink}|Click here to create one}}.`
+            } else {
+                document = `*This directory has no readme file.*`
+            }
         }
 
         let dawn = new Markdawn(

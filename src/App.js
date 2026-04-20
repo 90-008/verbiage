@@ -21,7 +21,10 @@ class App {
 
         this.assets = {}
 
-        this.storage = new StorageManager(join(__dirname, '../data'), {
+        let dataDir = process.env.VERBIAGE_DATA || join(__dirname, '../data')
+        console.log(`app > data: ${dataDir}`)
+
+        this.storage = new StorageManager(dataDir, {
             mimeFunction: Mime.fromFileName
         })
 

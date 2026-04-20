@@ -14,16 +14,20 @@
         <p>{put docDescription}</p>
         <div class="inline-toolbox">
             <h4 class="alt-font">Tools</h4>
+            {if @writeEnabled}
             {if fileType.printable}
             <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}"
                 class="button-primary button-compact linkbutton">edit</a>
+            {end}
             {end}
             <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}?dl=1"
                 class="button-primary button-compact linkbutton">download</a>
             <a href="/{put @currentWiki}/raw/{echo @currentFile.pathStripped}"
                 class="button-primary button-compact linkbutton">raw</a>
+            {if @writeEnabled}
             <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}?name={echo @currentFile.name}&action=delete"
                 class="button-danger button-compact linkbutton">delete</a>
+            {end}
         </div>
         <hr>
     </div>
@@ -67,6 +71,7 @@
         <h2 class="alt-font">{put docTitle}</h2>
         <p class="file-info">{put @currentFile.pathNormalized}</p>
         <p>{put docDescription}</p>
+        {if @writeEnabled}
         <div class="inline-toolbox">
             <h4 class="alt-font">Tools</h4>
             {if readmeFile}
@@ -76,6 +81,7 @@
             <a href="/{put @currentWiki}/edit/{echo @currentDir.pathAncestor}?name={echo @currentFile.name}&action=delete"
                 class="button-danger button-compact linkbutton">delete</a>
         </div>
+        {end}
         <hr>
     </div>
     <article id="md-document" class="markdown" data-rendered-size="{echo markdown.content.length}"
@@ -98,8 +104,10 @@
         <div class="sidebar-toolbox">
             <div class="toolbox-header">
                 <h4 class="alt-font">Files</h4>
+                {if @writeEnabled}
                 <a href="/{put @currentWiki}/edit/{echo @currentDir.pathStripped}"
                     class="button-primary button-compact linkbutton">new</a>
+                {end}
             </div>
             <ul class="sidebar-file-list">
                 {for fileList item}

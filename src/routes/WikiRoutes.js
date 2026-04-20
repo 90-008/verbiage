@@ -32,6 +32,7 @@ module.exports.ViewWikiPageRoute = new RouteLeaf(
                         currentDir: currentDir,
                         currentWiki: data.args.wiki,
                         currentFile: file,
+                        writeEnabled: true,
                     }, false)
 
             data.body = rendered.html
