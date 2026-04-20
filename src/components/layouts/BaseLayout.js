@@ -11,6 +11,8 @@ module.exports.hydrate = (ctx) => {
     }
 
     return {
-        wikiTabs: wikiTabs
+        wikiTabs: wikiTabs,
+        siteTitle: process.env.VERBIAGE_TITLE || 'Verbiage',
+        siteSubtitle: process.env.VERBIAGE_SUBTITLE || null
     }
 }

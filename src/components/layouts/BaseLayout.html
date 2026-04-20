@@ -9,8 +9,8 @@
     <div class="main">
         <div class="header-container">
             <div class="header-titles">
-                <h1 class="site-header alt-font">Verbiage</h1>
-                <p class="site-subheader alt-font">Subheader</p>
+                <h1 class="site-header alt-font">{put siteTitle}</h1>
+                {if siteSubtitle}<p class="site-subheader alt-font">{put siteSubtitle}</p>{end}
                 {if wikiTabs}
                 {render TabList wikiTabs}
                 {end}
