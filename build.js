@@ -16,7 +16,7 @@
         node build.js mywiki ./dist
 */
 
-const { join, dirname } = require('node:path')
+const { join, dirname, resolve } = require('node:path')
 const { mkdirSync, writeFileSync, cpSync, existsSync } = require('node:fs')
 
 const { App } = require('./src/App.js')
@@ -30,7 +30,7 @@ if (!args[0]) {
 }
 
 const WIKI_NAME = args[0]
-const OUT_DIR = join(__dirname, args[1] || 'dist')
+const OUT_DIR = args[1] ? resolve(args[1]) : join(__dirname, 'dist')
 
 console.log(`build > wiki:   "${WIKI_NAME}"`)
 console.log(`build > output: ${OUT_DIR}`)
