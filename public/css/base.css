@@ -118,7 +118,8 @@ body {
 }
 
 .site-header {
-    margin-bottom: 0.2em;
+    padding-bottom: 0.4em;
+    margin-bottom: 0em;
     margin-top: 0;
     color: var(--text-main);
 }
@@ -153,7 +154,7 @@ body {
 .site-footer {
     background: linear-gradient(50deg, var(--background-0) 30%, var(--background-1) 100%);
     border-top: 1px solid var(--border-2);
-    padding: 2em 1em;
+    padding: 1em 1em;
 }
 
 .site-footer p {
