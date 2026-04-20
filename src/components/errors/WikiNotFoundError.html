@@ -1,0 +1,18 @@
+<div class="page" id="not-found-page" data-rejection-message="{put @rejectionMessage}"
+    data-safe-path="{put @currentDir.pathNormalized}">
+    <h2 class="alt-font">Not Found</h2>
+    <p>Looks like you've taken a wrong step. The file or resource could not be found.</p>
+    <h3>What happened?</h3>
+    <p>{put @rejectionMessage}</p>
+    <h3>What can I do about it?</h3>
+    <ul class="choice-list">
+        <li>
+            <a href="/{echo @currentWiki}/w/{put @currentDir.pathStripped}">Go back</a>
+            <p>Go back to the nearest directory that exists (<code>{put @currentDir.pathNormalized}</code>)</p>
+        </li>
+        <li>
+            <a href="/{echo @currentWiki}">Go home</a>
+            <p>Go back to the <b>{put @currentWiki}</b> wiki home page</p>
+        </li>
+    </ul>
+</div>

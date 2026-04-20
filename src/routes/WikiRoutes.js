@@ -11,12 +11,16 @@ module.exports.ViewWikiPageRoute = new RouteLeaf(
     {
         "GET": (data, { lavender, storage, sanitizer }) => {
             let { file, ancestry } = storage.dig(data.args.path)
-            if (!file) { // TODO: proper error page
-                data.status = 404
-                return data
-            }
 
             let currentDir = ancestry.findLast(fil => fil.isDirectory)
+
+            if (!file) {
+                return data.reject(404, "File not found.", {
+                    currentWiki: data.args.wiki,
+                    currentDir: currentDir
+                })
+            }
+
             currentDir.list()
 
             let rendered = lavender
@@ -44,9 +48,11 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
             let cwd = dug.file
             let ancestry = dug.ancestry
 
-            if (!cwd) { // TODO: proper error page
-                data.status = 404
-                return data
+            if (!cwd) {
+                return data.reject(404, "Couldn't find the directory.", {
+                    currentWiki: data.args.wiki,
+                    currentDir: dug.ancestry.findLast(f => f.isDirectory)
+                })
             }
 
             let fileName = data.searchParams.get("name") || ""
@@ -57,9 +63,11 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
 
             switch (action) {
                 case "delete":
-                    if (cwd.tryGetChild(fileName) == null) { // TODO: proper error page
-                        data.status = 404
-                        return data
+                    if (cwd.tryGetChild(fileName) == null) {
+                        return data.reject(404, "Couldn't find the file to be deleted.", {
+                            currentWiki: data.args.wiki,
+                            currentDir: cwd
+                        })
                     }
 
                     action = "delete"
@@ -106,9 +114,9 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                 case "delete":
                     file = storage.dig(data.args.path).file
 
-                    if (!file || !file.tryGetChild(fileName)) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
+                    if (!file || !file.tryGetChild(fileName)) return data.reject(400, "The parent directory or file does not exist", { errorCode: "BAD_PATH" })
 
-                    if (!canDelete(file.tryGetChild(fileName))) return reportBadRequest(data, "NO_PERMISSION", "You do not have permission to perform this action")
+                    if (!canDelete(file.tryGetChild(fileName))) return data.reject(400, "You do not have permission to perform this action", { errorCode: "NO_PERMISSION" })
 
                     storage.delete(data.args.path, fileName)
 
@@ -117,7 +125,7 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     break
                 case "upload":
                     cwd = storage.dig(data.args.path).file
-                    if (!cwd) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
+                    if (!cwd) return data.reject(400, "The parent directory or file does not exist", { errorCode: "BAD_PATH" })
 
                     form.forEach("files", (uploadedFile) => {
                         cwd.upsert(uploadedFile.filename, uploadedFile.body)
@@ -128,10 +136,10 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     break
                 case "mkdir":
                     cwd = storage.dig(data.args.path).file
-                    if (!cwd) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
+                    if (!cwd) return data.reject(400, "The parent directory or file does not exist", { errorCode: "BAD_PATH" })
 
                     let dirName = form.get("filename")
-                    if (!dirName) return reportBadRequest(data, "MISSING_FORM_FIELD", "Missing directory name")
+                    if (!dirName || !dirName.body.toString('utf8')) return data.reject(400, "Missing directory name", { errorCode: "MISSING_FORM_FIELD" })
 
                     let newDir = cwd.mkdir(dirName.body.toString('utf8'))
 
@@ -139,13 +147,13 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     data.setHead("Location", `/${data.args.wiki}/w/${newDir.pathNormalized}`)
                     break
                 default:
-                    if (!form) return reportBadRequest(data, "BAD_FORM_DATA", "Missing or malformed form data")
+                    if (!form) return data.reject(400, "Missing or malformed form data", { errorCode: "BAD_FORM_DATA" })
 
                     let { filename, content } = form.getMany("filename", "content")
-                    if (!filename || !content) return reportBadRequest(data, "MISSING_FORM_FIELD", "Missing file name or content")
+                    if (!filename || !filename.body.toString('utf8') || !content) return data.reject(400, "Missing file name or content", { errorCode: "MISSING_FORM_FIELD" })
 
                     cwd = storage.dig(data.args.path).file
-                    if (!cwd) return reportBadRequest(data, "BAD_PATH", "The parent directory or file does not exist")
+                    if (!cwd) return data.reject(400, "The parent directory or file does not exist", { errorCode: "BAD_PATH" })
 
                     /*
                         Dig in create mode to make directories to allow the new file

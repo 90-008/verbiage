@@ -26,7 +26,10 @@ body {
     --media-thumbnail-size: 8em;
     --gallery-item-size: 22em;
 
-    font-family: 'Verdana', sans-serif;
+    --font-primary: 'Verdana', sans-serif;
+    --font-alt: 'Trebuchet MS';
+
+    font-family: var(--font-primary);
     background-color: var(--background-body);
     background-image: url("/static/img/noisy.png");
     background-repeat: repeat;
@@ -71,8 +74,16 @@ body {
     box-shadow: 2px 5px 7px #0000002e;
 }
 
+.centered {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .alt-font {
-    font-family: 'Trebuchet MS';
+    font-family: var(--font-alt);
 }
 
 .header-container {
@@ -309,6 +320,31 @@ body {
 
 .notice-danger {
     border-image: var(--gradient-danger) 1;
+}
+
+
+.choice-list>li {
+    margin-bottom: 1em;
+}
+
+.choice-list>li::marker {
+    content: "» ";
+    font-weight: bold;
+    font-size: 13pt;
+}
+
+.choice-list>li>p {
+    margin: 0;
+    margin-top: 0.35em;
+    font-size: 10pt;
+    color: var(--text-muted);
+}
+
+.choice-list>li>a {
+    font-size: 13pt;
+    font-weight: bold;
+    font-family: var(--font-alt);
+    color: var(--accent);
 }
 
 button {
@@ -622,7 +658,7 @@ button:active {
 }
 
 .media-gallery-caption {
-    font-family: 'Tahoma';
+    font-family: var(--font-alt);
     font-size: 10pt;
 }
 

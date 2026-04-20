@@ -1,0 +1,23 @@
+<div class="centered">
+    <div id="error-page" class="error-splash" data-http-status="{echo @rejectionCode}" data-error-name="{put @title}"
+        data-error-message="{put @rejectionMessage}" data-error-code="{put @rejectionType}">
+        <h1 class="error-title alt-font">{put @rejectionStrings.flavor}</h1>
+        <span class="error-byline">HTTP {echo @rejectionCode}</span>
+        <h2 class="error-smiley">;-;</h2>
+        <p>{put @rejectionStrings.description}</p>
+        <h4>What happened?</h4>
+        <p class="error-explanation">{put @rejectionMessage}</p>
+        {if @rejectionType}<span class="error-byline">{put @rejectionType}</span>{end}
+        <h4>What can I do about it?</h4>
+        <ul class="choice-list">
+            <li>
+                <a href="/">Go home</a>
+                <p>Go back to the home page</p>
+            </li>
+        </ul>
+        <footer class="error-footer">
+            <hr>
+            <p>errored by <a href="https://github.com/axiand/verbiage">verbiage</a></p>
+        </footer>
+    </div>
+</div>
