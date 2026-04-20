@@ -43,7 +43,7 @@ module.exports.ViewWikiPageRoute = new RouteLeaf(
 module.exports.EditWikiPageRoute = new RouteLeaf(
     "/:wiki/edit/+path",
     {
-        "GET": (data, { lavender, storage, reportBadRequest }) => {
+        "GET": (data, { lavender, storage }) => {
             let dug = storage.dig(data.args.path)
             let cwd = dug.file
             let ancestry = dug.ancestry
@@ -102,7 +102,7 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
             data.body = rendered.html
             return data
         },
-        "POST": async (data, { storage, reportBadRequest }) => {
+        "POST": async (data, { storage }) => {
             let form = await data.formData()
 
             let action = data.searchParams.get("action") || "edit"
@@ -189,7 +189,7 @@ module.exports.RawFileRoute = new RouteLeaf(
                 return data
             }
 
-            if (file.isDirectory) return reportBadRequest(data, "BAD_FILE_ACTION", "Cannot perform raw get on a directory", lavender)
+            if (file.isDirectory) return data.reject(400, "Can't perform raw get on a directory", { errorCode: "BAD_FILE_ACTION" })
 
             let isDownload = data.searchParams.get("dl")
             if (isDownload == "1") data.setHead("Content-Disposition", "attachment")

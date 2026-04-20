@@ -35,6 +35,11 @@ module.exports.StaticAssetRoute = new RouteLeaf(
     }
 )
 
+/*
+    Status code handlers can be wildcarded,
+    so this handler steps in when there isn't
+    a more specific one.
+*/
 module.exports.ErrorHandlerRoute = new RouteLeaf(
     "/_statusCode/:code",
     {
