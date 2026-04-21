@@ -733,8 +733,19 @@ thead {
 
 th,
 td {
+    overflow-wrap: break-word;
     padding: 0.3em 0.4em;
     border: 1px solid var(--border-1);
+
+    &:first-child {
+        white-space: nowrap;
+        max-width: unset;
+        width: 1%;
+    }
+}
+
+th {
+    white-space: nowrap;
 }
 
 textarea {
