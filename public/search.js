@@ -8,8 +8,7 @@
     async function loadIndex() {
         if (searchData) return;
         
-        const pathParts = window.location.pathname.split('/');
-        const wikiName = pathParts[1];
+        const wikiName = searchInput.getAttribute('data-wiki');
         
         try {
             const response = await fetch(`/${wikiName}/search-index.json`);
@@ -65,7 +64,7 @@
             return;
         }
 
-        const wikiName = window.location.pathname.split('/')[1];
+        const wikiName = searchInput.getAttribute('data-wiki');
         
         searchResults.innerHTML = results.map(item => `
             <div class="search-result-item">
