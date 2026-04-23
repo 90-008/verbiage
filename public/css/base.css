@@ -722,9 +722,16 @@ a:visited {
     color: var(--accent-alt);
 }
 
+.table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
+    display: table;
 }
 
 thead {
