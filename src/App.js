@@ -7,6 +7,7 @@ const { Waiter } = require('../lib/waiter/WaiterServer.js')
 const { Component } = require('../lib/lavender/Component.js')
 const { Lavender, Sanitizer } = require('../lib/lavender/Lavender.js')
 const { StorageManager } = require('../lib/cabinet/Cabinet.js')
+const { SearchIndexer } = require('./SearchIndexer.js')
 
 class App {
     server
@@ -15,6 +16,8 @@ class App {
     storage
     sanitizer
     wikiName
+    searchIndexer
+    cachedSearchIndex
 
     constructor() {
         this.server = new Waiter(this)
@@ -31,12 +34,26 @@ class App {
             mimeFunction: Mime.fromFileName
         })
 
+        this.searchIndexer = new SearchIndexer(this.storage)
+
         this.sanitizer = new Sanitizer({
             allowedTags: ["p", "a", "b", "i", "div"],
             allowedAttributes: ["href", "style", "class"]
         })
 
         return this
+    }
+
+    getSearchIndex() {
+        if (!this.cachedSearchIndex) {
+            console.log("app > Rebuilding search index...")
+            this.cachedSearchIndex = this.searchIndexer.buildIndex()
+        }
+        return this.cachedSearchIndex
+    }
+
+    invalidateSearchIndex() {
+        this.cachedSearchIndex = null
     }
 
     start() {
@@ -114,13 +131,11 @@ class App {
         files.forEach((f) => {
             if (statSync(join(where, f)).isDirectory()) return
 
-            let basePart = parse(f).dir + "/" + parse(f).name
-            let assetExt = parse(f).ext
-            let assetPath = basePart + assetExt
+            let assetPath = f.replaceAll("\\", "/")
             console.log(`app/static > Importing asset ${assetPath}`)
 
-            let assetContent = readFileSync(join(where, assetPath))
-            this.assets[assetPath] = new Blob([assetContent], { type: Mime.fromExt(assetExt) })
+            let assetContent = readFileSync(join(where, f))
+            this.assets[assetPath] = new Blob([assetContent], { type: Mime.fromExt(parse(f).ext) })
         })
     }
 

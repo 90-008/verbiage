@@ -58,6 +58,14 @@ const STATIC_OUT = join(OUT_DIR, 'static')
 cpSync(PUBLIC_DIR, STATIC_OUT, { recursive: true })
 console.log(`build > copied public/ → ${STATIC_OUT}`)
 
+// -- search index --
+
+const searchIndex = app.getSearchIndex()
+const searchIndexPath = join(OUT_DIR, WIKI_NAME, 'search-index.json')
+mkdirSync(dirname(searchIndexPath), { recursive: true })
+writeFileSync(searchIndexPath, JSON.stringify(searchIndex), 'utf8')
+console.log(`build > generated search-index.json`)
+
 // -- crawl & render --
 
 let pagesOk = 0

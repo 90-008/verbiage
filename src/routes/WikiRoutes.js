@@ -29,6 +29,7 @@ module.exports.ViewWikiPageRoute = new RouteLeaf(
                     {
                         sanitizer: sanitizer,
                         ancestry: ancestry,
+                        "@ancestry": ancestry, // Ensure both ways for safety
                         currentDir: currentDir,
                         currentWiki: data.args.wiki,
                         currentFile: file,
@@ -103,7 +104,8 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
             data.body = rendered.html
             return data
         },
-        "POST": async (data, { storage }) => {
+        "POST": async (data, app) => {
+            let { storage } = app
             let form = await data.formData()
 
             let action = data.searchParams.get("action") || "edit"
@@ -120,6 +122,7 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     if (!canDelete(file.tryGetChild(fileName))) return data.reject(400, "You do not have permission to perform this action", { errorCode: "NO_PERMISSION" })
 
                     storage.delete(data.args.path, fileName)
+                    app.invalidateSearchIndex()
 
                     data.status = 302
                     data.setHead("Location", `/${data.args.wiki}/w/${data.args.path}`)
@@ -131,6 +134,7 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     form.forEach("files", (uploadedFile) => {
                         cwd.upsert(uploadedFile.filename, uploadedFile.body)
                     })
+                    app.invalidateSearchIndex()
 
                     data.status = 302
                     data.setHead("Location", `/${data.args.wiki}/w/${data.args.path}`)
@@ -143,6 +147,7 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     if (!dirName || !dirName.body.toString('utf8')) return data.reject(400, "Missing directory name", { errorCode: "MISSING_FORM_FIELD" })
 
                     let newDir = cwd.mkdir(dirName.body.toString('utf8'))
+                    app.invalidateSearchIndex()
 
                     data.status = 302
                     data.setHead("Location", `/${data.args.wiki}/w/${newDir.pathNormalized}`)
@@ -168,12 +173,24 @@ module.exports.EditWikiPageRoute = new RouteLeaf(
                     if (!existingFile && (!newFileName.endsWith(".md") && !newFileName.endsWith(".txt"))) newFileName += ".md"
 
                     let newFile = storage.upsert(data.args.path, newFileName, content.body)
+                    app.invalidateSearchIndex()
 
                     data.status = 302
                     data.setHead("Location", `/${data.args.wiki}/w/${newFile.pathStripped}`)
                     break
             }
 
+            return data
+        }
+    }
+)
+
+module.exports.SearchIndexRoute = new RouteLeaf(
+    "/:wiki/search-index.json",
+    {
+        "GET": (data, app) => {
+            data.body = JSON.stringify(app.getSearchIndex())
+            data.contentType = "application/json"
             return data
         }
     }
